@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "daisyui": "^3.1.5",
+    "tailwindcss": "^3.3.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "commit": "cz"
+  }
+}

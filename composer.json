@@ -1,0 +1,19 @@
+{
+    "name": "kilki/projet-php-fabien",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kilki\\ProjetPhpFabien\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hardstyle",
+            "email": "Hardstyle.dd@gmail.com"
+        }
+    ]
+}
