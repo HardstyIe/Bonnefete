@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Bootstrap;
 
 use PDO;
 

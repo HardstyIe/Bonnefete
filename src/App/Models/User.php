@@ -10,6 +10,7 @@ class User
   protected $prenom;
   protected $nom;
   protected $password;
+  protected $role;
 
   public function getId(): int
   {
@@ -60,5 +61,15 @@ class User
     if (strlen($password) > 2) {
       $this->password = $password;
     }
+  }
+
+  public function getRole(): Role
+  {
+    return $this->role;
+  }
+
+  public function setRole(Role $role): void
+  {
+    $this->role = $role;
   }
 }

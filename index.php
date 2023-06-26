@@ -1,9 +1,9 @@
 <?php require_once 'vendor/autoload.php';
 session_start();
 
-require_once 'Router.php';
+require_once 'src/Bootstrap/Router.php';
 
-use App\Router;
+use Bootstrap\Router;
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createUnsafeImmutable(__DIR__);

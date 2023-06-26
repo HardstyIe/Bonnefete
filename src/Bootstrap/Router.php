@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace Bootstrap;
+
+require 'src/App/Controllers/UserController.php';
 
 class Router
 {

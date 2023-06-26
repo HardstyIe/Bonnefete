@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-require_once('Models/UserModel.php');
+require_once('src/App/Models/UserModel.php');
 
 use App\Models\UserModel;
 
@@ -34,19 +34,15 @@ class UserController
 
   public function postLogin()
   {
-    $this->userModel = new UserModel();
-    $user = $this->userModel->getOneByEmail($_POST['email']);
-    if ($user && password_verify($_POST['password'], $user->password)) {
-      $_SESSION['user'] = $user;
-      header('Location: /php-crud/char/index');
-    } else {
-      header('Location: /php-crud/user/register');
-    }
+    $user = $_POST;
+    $message = $this->userModel->loginUser($user);
+    echo $message;
+    echo '<a href="../user/login"> Se Connecter </a>';
   }
 
   public function getLogout()
   {
-    session_destroy();
-    header('Location: /php-crud/char/index');
+    $this->userModel->logoutUser();
+    header('Location: /projet-php-fabien/user/login');
   }
 }
