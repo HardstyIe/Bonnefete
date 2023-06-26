@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Bootstrap\Database;
+use Bonnefete\Bootstrap\Database;
+
 
 
 class UserModel

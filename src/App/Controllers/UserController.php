@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 require_once('src/App/Models/UserModel.php');
+require_once('src/App/Views/user/register.php');
 
 use App\Models\UserModel;
 
@@ -16,7 +17,7 @@ class UserController
   }
   public function getRegister()
   {
-    require_once 'Views/user/register.php';
+    require_once 'src/App/Views/user/register.php';
   }
 
   public function postRegister()
@@ -27,9 +28,10 @@ class UserController
     echo '<a href="../user/login"> Se Connecter </a>';
   }
 
+
   public function getLogin()
   {
-    require_once 'Views/user/login.php';
+    require_once './src/App/Views/user/login.php';
   }
 
   public function postLogin()
@@ -43,6 +45,6 @@ class UserController
   public function getLogout()
   {
     $this->userModel->logoutUser();
-    header('Location: /projet-php-fabien/user/login');
+    header('Location: /bonnefete/user/login');
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../Views/head.php'; ?>
+require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 
 <form action="../user/login" method="post">
@@ -19,4 +19,4 @@ require_once '../../Views/head.php'; ?>
 
 
 <?php
-require_once '../../Views/foot.php'; ?>
+require_once '../Bonnefete/src/App/Views/foot.php'; ?>

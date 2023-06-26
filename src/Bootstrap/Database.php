@@ -1,6 +1,6 @@
 <?php
 
-namespace Bootstrap;
+namespace Bonnefete\Bootstrap;
 
 use PDO;
 

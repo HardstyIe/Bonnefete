@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'kilki/projet-php-fabien',
+        'name' => 'hardy/bonnefete',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a88e153f8eaa692848a645defabf986210f20ea1',
+        'reference' => '788904bf49756766c73660839ebc35b58e53fae1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -19,10 +19,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'kilki/projet-php-fabien' => array(
+        'hardy/bonnefete' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a88e153f8eaa692848a645defabf986210f20ea1',
+            'reference' => '788904bf49756766c73660839ebc35b58e53fae1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
