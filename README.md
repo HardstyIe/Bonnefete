@@ -1,20 +1,18 @@
-# Bonnefete
+# Bonnefete Project
 
-Projet Bonnefete , pour faire un blog
-
-Fonctionnalité
+Feature
 
 ```bash
-- Connexion du profil
-- Visualisation du profil
-- Modification profil
-- Suppression du profil
-- Ajout d’un post
-- Visualisation d’un post
-- Modification d’un post
-- Suppression d’un post
-- Visualisation de la liste des utilisateurs (modérateur)
-- Visualisation de la liste des posts d’un utilisateur
+- Connexion / Register
+- View Profil
+- Edit Profil
+- Delete Profil
+- Add a post
+- View a post
+- Edit a post
+- Delete a post
+- Viewing list of all users (moderator)
+- Viewing all user's post
 ```
 
 ## Tech Stack
@@ -43,5 +41,5 @@ init the file using the following commands
 
 ## Authors
 
-- [@DylanDuchemin59](https://www.github.com/HardstyleIe)
+- [@DylanDuchemin59](https://www.github.com/HardstyIe)
 - [@FabienFattore](https://www.github.com/FabienFattore)
