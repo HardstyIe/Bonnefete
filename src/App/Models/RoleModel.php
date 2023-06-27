@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace Bonnefete\App\Models;
+
 
 use Core\Database;
 

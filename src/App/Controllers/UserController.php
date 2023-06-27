@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace Bonnefete\App\Controllers;
+
 
 require_once('src/App/Models/UserModel.php');
-require_once('src/App/Views/user/register.php');
 
-use App\Models\UserModel;
+use Bonnefete\App\Models\UserModel;
 
 class UserController
 {

@@ -1,9 +1,12 @@
 <?php require_once 'vendor/autoload.php';
+
+use Bonnefete\Bootstrap\Router;
+
 session_start();
 
 require_once 'src/Bootstrap/Router.php';
 
-use Bootstrap\Router;
+
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createUnsafeImmutable(__DIR__);

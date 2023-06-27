@@ -1,4 +1,4 @@
-<?php require_once '../../Views/head.php'; ?>
+<?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 
 
@@ -7,4 +7,4 @@
 
 
 
-0<?php require_once '../../Views/foot.php'; ?>
+0<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>

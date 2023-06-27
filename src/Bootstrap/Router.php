@@ -1,6 +1,6 @@
 <?php
 
-namespace Bootstrap;
+namespace Bonnefete\Bootstrap;
 
 require 'src/App/Controllers/UserController.php';
 
