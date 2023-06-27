@@ -34,14 +34,15 @@ class UserController
     require_once '../Bonnefete/src/App/Views/users/login.php';
   }
 
+
   public function postLogin()
   {
     $user = $_POST;
     $message = $this->userModel->loginUser($user);
     echo $message;
-    echo '<a href="../user/login"> Se Connecter </a>';
     header('Location: /bonnefete/home/index');
   }
+
 
   public function getLogout()
   {
