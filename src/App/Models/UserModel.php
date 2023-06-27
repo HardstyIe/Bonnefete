@@ -18,7 +18,6 @@ class UserModel
 
   public function createUser($user)
   {
-
     $password = password_hash($user['password'], PASSWORD_DEFAULT);
     try {
       $query = $this->connection->getPdo()->prepare('INSERT INTO user (User_Email, User_Surname, User_Name, User_Password) VALUES (:email, :prenom, :nom, :password)');
@@ -30,6 +29,7 @@ class UserModel
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {
+      var_dump($e->getMessage());
       return " une erreur est survenue";
     }
   }
