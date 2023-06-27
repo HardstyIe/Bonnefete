@@ -17,7 +17,7 @@ require_once '../Bonnefete/src/App/Views/head.php'; ?>
   <input type="text" name="password" placeholder="password" required>
 
 
-  <button>S'inscrire</button>
+  <a class="create-account" href="">S'inscrire</a>
 </form>
 
 

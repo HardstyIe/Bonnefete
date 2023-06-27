@@ -68,12 +68,18 @@ form {
   }
 
   .register {
-    margin-top: 5%;
+    margin: 5% 0 2% 0;
     text-decoration: none;
-    color: #38413d;
+    color: var(--main-color);
+  }
+
+  .create-account {
+    margin: 5% 0 2% 0;
+    text-decoration: none;
+    color: var(--main-color);
   }
 
   button {
-    color: #38413d;
+    color: var(--main-color);
     margin-top: 5%;
   }
