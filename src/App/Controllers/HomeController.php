@@ -15,6 +15,8 @@ class HomeController
   {
     $this->homeModel = new HomeModel();
   }
+
+
   public function getIndex()
   {
     $posts = $this->homeModel->getPosts();
