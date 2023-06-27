@@ -9,11 +9,6 @@
     <label for="content">Contenu</label>
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
   </div>
-  <div>
-    <label for="date">Date</label>
-    <input type="date" name="date" id="date">
-
-  </div>
   <button>Publier</button>
 </form>
 

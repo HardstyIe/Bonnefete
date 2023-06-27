@@ -10,20 +10,27 @@
     <?php foreach ($posts as $post) : ?>
       <div class="card">
         <div class="card-header">
-          <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+          <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+
+
+          </div>
           <div class="card-name">
-            <h3><?php echo $post['User_Name'] . ' ' . $post['User_Surname']; ?></h3>
-            <p><?php echo $post['Post_Date']; ?></p>
+            <h3>
+              <?php echo $post['Post_Title']; ?>
+            </h3>
+            <p>
+              <?php echo $post['Post_CreateAt']; ?>
+            </p>
+
+          </div>
+          <div class="card-body">
+            <p><?php echo $post['Post_Article']; ?></p>
           </div>
         </div>
-        <div class="card-body">
-          <p><?php echo $post['Post_Content']; ?></p>
-        </div>
+      <?php endforeach; ?>
+
       </div>
-    <?php endforeach; ?>
 
-  </div>
+    <?php endif; ?>
 
-<?php endif; ?>
-
-<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+    <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
