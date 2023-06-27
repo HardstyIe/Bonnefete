@@ -21,11 +21,16 @@
         <a class="nav-quit" href="../user/logout">Se déconnecter</a>
         <div class="nav-user-id"><a href="">
             <img class="nav-img-user" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt=""></a>
-          <a class="nav-user-name"><?php echo $_SESSION['user']['User_Surname']; ?></a>
+          <a class="nav-user-name">Utilisateur</a>
         </div>
       </div>
 
-      <?php else : ?><?php endif; ?>
+    <?php else : ?>
+      <a class="nav-item nav-link" href="../user/login">Se connecter</a>
+      <a class="nav-item nav-link" href="../user/register">S'enregistrer</a>
+
+
+    <?php endif; ?>
 
   </nav>
 </body>
