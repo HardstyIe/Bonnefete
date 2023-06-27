@@ -28,10 +28,6 @@
       </div>
 
     <?php else : ?>
-      <a class="nav-item nav-link" href="../user/login">Se connecter</a>
-      <a class="nav-item nav-link" href="../user/register">S'enregistrer</a>
-
-
     <?php endif; ?>
 
   </nav>
