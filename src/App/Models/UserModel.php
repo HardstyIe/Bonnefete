@@ -36,26 +36,25 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,FK_Post_Id FROM user WHERE email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,FK_Post_Id FROM user WHERE User_Email = :email");
     $query->execute([
       'email' => $email,
     ]);
-    $user = $query->fetchObject();
+    $user = $query->fetch();
     return $user;
   }
-
   public function loginUser($user)
   {
-    $user = $this->getOneByEmail($user['email']);
-    if ($user) {
-      if (password_verify($user->password, $user['password'])) {
-        $_SESSION['user'] = $user;
-        return " Bien Connecté ";
+    $userFromDb = $this->getOneByEmail($user['email']);
+    if ($userFromDb) {
+      if (password_verify($user['password'], $userFromDb['User_Password'])) {
+        $_SESSION['user'] = $userFromDb;
+        header('Location: /bonnefete/user/register');
       } else {
-        return " Mot de passe incorrect ";
+        return "Mot de passe incorrect";
       }
     } else {
-      return " Utilisateur inconnu ";
+      return "Utilisateur inconnu";
     }
   }
 
