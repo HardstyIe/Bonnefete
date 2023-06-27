@@ -12,7 +12,7 @@ require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 
   <button>Se Connecter</button>
-  <a href="/Bonnefete/user/register">Créer un compte</a>
+  <a class="register" href="/Bonnefete/user/register">Créer un compte</a>
 </form>
 
 
@@ -33,7 +33,7 @@ require_once '../Bonnefete/src/App/Views/foot.php'; ?>
     align-items: center;
   }
 
-  label, button {
+  label {
     color: #38413d;
     margin: 1%;
   }
@@ -44,12 +44,15 @@ require_once '../Bonnefete/src/App/Views/foot.php'; ?>
     padding-left: 5px;
   }
 
-  button, a {
+  button {
+    color: #38413d;
     margin-top: 5%;
   }
 
-  a {
-    color: #38413d;
+  .register {
+    margin-top: 5%;
     text-decoration: none;
+    color: #38413d;
   }
+
 </style>
