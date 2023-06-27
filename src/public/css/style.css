@@ -8,7 +8,10 @@ body {
     height: 100vh;
     background-image: url('/Bonnefete/src/public/assets/images/7158.jpg');
     background-size: 100%;
+    background-attachment: fixed;
   }
+
+/* navbar */
 
 nav {
     display: flex;
@@ -22,7 +25,7 @@ nav {
 }
 
 .navbar-brand {
-    font-size: 2.8em;
+    font-size: 2.7em;
 }
 .nav-user {
     font-size: 1.3em;
@@ -43,6 +46,13 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
+
+img {
+    width: 50px;
+    margin-top: 5px;
+}
+
+/* form regiter and login */
 
 form {
     border-radius: 5px;
