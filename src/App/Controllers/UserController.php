@@ -3,7 +3,7 @@
 namespace Bonnefete\App\Controllers;
 
 
-require_once('src/App/Models/UserModel.php');
+require_once('./src/App/Models/UserModel.php');
 
 use Bonnefete\App\Models\UserModel;
 
@@ -17,7 +17,7 @@ class UserController
   }
   public function getRegister()
   {
-    require_once 'src/App/Views/user/register.php';
+    require_once '../Bonnefete/src/App/Views/users/register.php';
   }
 
   public function postRegister()
@@ -31,7 +31,7 @@ class UserController
 
   public function getLogin()
   {
-    require_once './src/App/Views/user/login.php';
+    require_once '../Bonnefete/src/App/Views/users/login.php';
   }
 
   public function postLogin()
