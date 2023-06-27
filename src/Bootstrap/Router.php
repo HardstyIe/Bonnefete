@@ -29,6 +29,7 @@ class Router
     // Ajouter le namespace complet aux contrôleurs
 
     $controllerName = '\\Bonnefete\\App\\Controllers\\' . $controllerName;
+
     // Si le contrôleur n'existe pas ou que la méthode n'existe pas, afficher une erreur 404
     if (!class_exists($controllerName) || !method_exists($controllerName, $actionName)) {
       header("HTTP/1.0 404 Not Found");
