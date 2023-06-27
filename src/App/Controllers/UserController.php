@@ -40,6 +40,7 @@ class UserController
     $message = $this->userModel->loginUser($user);
     echo $message;
     echo '<a href="../user/login"> Se Connecter </a>';
+    header('Location: /bonnefete/home/index');
   }
 
   public function getLogout()
