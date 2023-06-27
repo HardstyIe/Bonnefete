@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace Bonnefete\Bootstrap;
+
+require 'src/App/Controllers/UserController.php';
 
 class Router
 {
@@ -9,7 +11,7 @@ class Router
 
   public function __construct($requestUri, $requestMethod)
   {
-    $this->requestUri = $this->removeSubdirectoryFromUri($requestUri, '/projet-php-fabien');
+    $this->requestUri = $this->removeSubdirectoryFromUri($requestUri, '/bonnefete');
     $this->requestMethod = $requestMethod;
   }
 
@@ -25,6 +27,7 @@ class Router
     $controllerName = ucfirst(array_shift($segments)) . 'Controller';
     $actionName = strtolower($this->requestMethod) . ucfirst(array_shift($segments));
     // Ajouter le namespace complet aux contrôleurs
+
     $controllerName = '\\App\\Controllers\\' . $controllerName;
     // Si le contrôleur n'existe pas ou que la méthode n'existe pas, afficher une erreur 404
     if (!class_exists($controllerName) || !method_exists($controllerName, $actionName)) {

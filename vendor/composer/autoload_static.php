@@ -23,10 +23,6 @@ class ComposerStaticInit0da0c4c9b9587e8252bacb3602a5198b
         array (
             'PhpOption\\' => 10,
         ),
-        'K' => 
-        array (
-            'Kilki\\ProjetPhpFabien\\' => 22,
-        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -34,6 +30,10 @@ class ComposerStaticInit0da0c4c9b9587e8252bacb3602a5198b
         'D' => 
         array (
             'Dotenv\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Bonnefete\\' => 10,
         ),
     );
 
@@ -54,10 +54,6 @@ class ComposerStaticInit0da0c4c9b9587e8252bacb3602a5198b
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'Kilki\\ProjetPhpFabien\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
@@ -65,6 +61,10 @@ class ComposerStaticInit0da0c4c9b9587e8252bacb3602a5198b
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Bonnefete\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

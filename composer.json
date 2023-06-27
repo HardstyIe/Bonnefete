@@ -1,19 +1,19 @@
 {
-    "name": "kilki/projet-php-fabien",
-    "type": "project",
-    "require": {
-        "vlucas/phpdotenv": "^5.5"
-    },
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Kilki\\ProjetPhpFabien\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Hardstyle",
-            "email": "Hardstyle.dd@gmail.com"
-        }
-    ]
+  "name": "hardy/bonnefete",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Bonnefete\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "HardstyIe",
+      "email": "hardstyle.dd@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  }
 }
