@@ -13,8 +13,8 @@
 
 <body>
   <nav class="navbar">
-    <a class="navbar-brand" href="../char/index">BONNEFETE
-    <img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt=""></a>
+    <a class="navbar-brand" href="../char/index"><img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">BONNEFETE
+    </a>
 
     <?php if (isset($_SESSION['user'])) : ?>
       <div class="nav-user">

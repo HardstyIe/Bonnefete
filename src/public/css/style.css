@@ -4,6 +4,7 @@
 }
 
 body {
+    margin: 0;
     width: 100vw;
     height: 100vh;
     background-image: url('/Bonnefete/src/public/assets/images/7158.jpg');
