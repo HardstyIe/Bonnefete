@@ -3,9 +3,8 @@
 
 
 <?php if (isset($_SESSION['user'])) : ?>
-  <div>
-    <h1>Bienvenue sur BONNEFETE</h1>
-    <a href="../post/create" class="btn">Publier un Post</a>
+  <div class="home-page">
+    <a class="btn-post" href="../post/create" ><img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
 
     <?php foreach ($posts as $post) : ?>
       <div class="card">

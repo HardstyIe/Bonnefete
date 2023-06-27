@@ -13,12 +13,12 @@
 
 <body>
   <nav class="navbar">
-    <a class="navbar-brand" href="../char/index">BONNEFETE
-    <img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt=""></a>
+    <a class="navbar-brand" href="../char/index"><img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">BONNEFETE
+    </a>
 
     <?php if (isset($_SESSION['user'])) : ?>
       <div class="nav-user">
-        <a class="nav-user-profile">Profil</a>
+        <a class="nav-user-profile" href="">Profil</a>
         <a class="nav-quit" href="../user/logout">Se déconnecter</a>
         <div class="nav-user-id"><a href="">
             <img class="nav-img-user" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt=""></a>
