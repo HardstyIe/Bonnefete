@@ -111,3 +111,42 @@ button {
 
 /* post create */
 
+.post-create {
+  background-color: var(--main-color);
+  border: 15px solid var(--second-color) ;
+  display: flex;
+  width: 60%;
+  margin: 5% auto;
+  padding-top: 1%;
+}
+
+.post-create label {
+  color: var(--second-color);
+}
+
+.post-create input {
+  color: var(--main-color);
+}
+
+#content {
+  background-color: var(--second-color);
+  color: var(--main-color);
+  width: 400px;
+  resize: none;
+}
+
+#title {
+  background-color: var(--second-color);
+  width: 400px;
+}
+
+#post {
+  background-color: var(--second-color);
+  color: var(--main-color);
+  padding: 0.5%;
+  border-radius: 5px;
+}
+
+#post:hover {
+  color: green;
+}
