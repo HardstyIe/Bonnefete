@@ -1,6 +1,7 @@
 :root {
   --main-color: #38413d;
   --second-color: #d9d9d9;
+  --valid-color: green;
 }
 
 body {
@@ -132,6 +133,7 @@ button {
   background-color: var(--second-color);
   color: var(--main-color);
   width: 400px;
+  height: 220px;
   resize: none;
 }
 
@@ -148,5 +150,5 @@ button {
 }
 
 #post:hover {
-  color: green;
+  color: var(--valid-color);
 }
