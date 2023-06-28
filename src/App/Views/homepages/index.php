@@ -25,17 +25,12 @@
       <div class="card-body">
         <p><?php echo $post['Post_Article']; ?></p>
       </div>
-    </div>
-    <div>
-      <a class="btn-like" href=""><img src="/Bonnefete/src/public/assets/icon/icons8-coeur-96.png" alt="">Likez</a>
-      <a class="btn-comment" href=""><img src="/Bonnefete/src/public/assets/icon/icons8-commentaires-96.png"
-          alt="">Commentez</a>
 
-    </div>
-    <?php endforeach; ?>
 
+
+      <?php endforeach; ?>
+    </div>
   </div>
-
   <?php endif; ?>
 
   <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
