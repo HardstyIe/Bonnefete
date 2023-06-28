@@ -16,7 +16,7 @@ class HomeModel
 
   public function getPosts()
   {
-    $sql = "SELECT Post_Title,Post_Article,Post_CreateAt FROM post";
+    $sql = "SELECT Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id ";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute();
     return $query->fetchAll();
@@ -37,23 +37,6 @@ class HomeModel
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetchAll();
-  }
-
-  public function createPost($post)
-  {
-    try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO post (Post_Title,Post_Article,Post_CreateAt,User_Id) VALUES (:title, :article, :date, :user)');
-      $query->execute([
-        'title' => $post['title'],
-        'article' => $post['article'],
-        'date' => $post['date'],
-        'user' => $post['user'],
-      ]);
-      return " Bien Enregistré ";
-    } catch (\PDOException $e) {
-      var_dump($e->getMessage());
-      return " une erreur est survenue";
-    }
   }
 
   public function updatePost($post)

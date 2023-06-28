@@ -11,9 +11,7 @@
   <div class="card">
     <div class="card-header">
       <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
-        <?php foreach ($users as $user) : ?>
-        <h3><?php echo $user['User_Name'] . ' ' . $user['User_Surname']; ?></h3>
-        <?php endforeach; ?>
+        <h3><?php echo $post['User_Name'] . ' ' . $post['User_Surname']; ?></h3>
       </div>
       <div class="card-name">
         <h3>

@@ -5,7 +5,7 @@ require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 <form action="../user/register" method="post">
   <label for="email">E-mail</label>
-  <input type="text" name="email" placeholder="email" required>
+  <input type="email" name="email" placeholder="email" required>
 
   <label for="prenom">Prénom</label>
   <input type="text" name="prenom" placeholder="prenom" required>
@@ -14,10 +14,10 @@ require_once '../Bonnefete/src/App/Views/head.php'; ?>
   <input type="text" name="nom" placeholder="nom" required>
 
   <label for="password">Mot de passe</label>
-  <input type="text" name="password" placeholder="password" required>
+  <input type="password" name="password" placeholder="password" required>
 
 
-  <a class="create-account" href="">S'inscrire</a>
+  <button>S'inscrire</button>
 </form>
 
 
