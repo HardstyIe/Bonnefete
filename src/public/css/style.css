@@ -120,7 +120,7 @@ button {
 
 .post-create {
   background-color: var(--main-color);
-  border: 15px solid var(--second-color) ;
+  border: 15px solid var(--second-color);
   display: flex;
   width: 60%;
   margin: 10% auto 0 auto;
