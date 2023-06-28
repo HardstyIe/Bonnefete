@@ -4,25 +4,33 @@
 
 <?php if (isset($_SESSION['user'])) : ?>
   <div class="home-page">
-    <a class="btn-post" href="../post/create" ><img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
+    <a class="btn-post" href="../post/create"><img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
 
     <?php foreach ($posts as $post) : ?>
       <div class="card">
         <div class="card-header">
-          <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+          <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+            <?php foreach ($users as $user) : ?>
+              <h3><?php echo $user['User_Name'] . ' ' . $user['User_Surname']; ?></h3>
+            <?php endforeach; ?>
+          </div>
           <div class="card-name">
-            <h3><?php echo $post['User_Name'] . ' ' . $post['User_Surname']; ?></h3>
-            <p><?php echo $post['Post_Date']; ?></p>
+            <h3>
+              <?php echo $post['Post_Title']; ?>
+            </h3>
+            <p>
+              <?php echo $post['Post_CreateAt']; ?>
+            </p>
+
+          </div>
+          <div class="card-body">
+            <p><?php echo $post['Post_Article']; ?></p>
           </div>
         </div>
-        <div class="card-body">
-          <p><?php echo $post['Post_Content']; ?></p>
-        </div>
+      <?php endforeach; ?>
+
       </div>
-    <?php endforeach; ?>
 
-  </div>
+    <?php endif; ?>
 
-<?php endif; ?>
-
-<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+    <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
