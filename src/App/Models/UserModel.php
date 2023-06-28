@@ -70,4 +70,47 @@ class UserModel
     $users = $query->fetchAll();
     return $users;
   }
+
+  public function getOneById($id)
+  {
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user WHERE User_Id = :id");
+    $query->execute([
+      'id' => $id,
+    ]);
+    $user = $query->fetch();
+    return $user;
+  }
+
+  public function updateUser($user)
+  {
+    try {
+      $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
+      $query->execute([
+        'email' => $user['email'],
+        'nom' => $user['nom'],
+        'prenom' => $user['prenom'],
+        'password' => $user['password'],
+        'role' => $user['role'],
+        'id' => $user['id'],
+      ]);
+      return " Bien Enregistré ";
+    } catch (\PDOException $e) {
+      var_dump($e->getMessage());
+      return " une erreur est survenue";
+    }
+  }
+
+  public function deleteUser($id)
+  {
+    try {
+      $query = $this->connection->getPdo()->prepare('DELETE FROM user WHERE User_Id = :id');
+      $query->execute([
+        'id' => $id,
+      ]);
+      return " Bien Supprimé ";
+    } catch (\PDOException $e) {
+      var_dump($e->getMessage());
+      return " une erreur est survenue";
+    }
+  }
 }

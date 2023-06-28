@@ -49,4 +49,20 @@ class UserController
     $this->userModel->logoutUser();
     header('Location: /bonnefete/user/login');
   }
+
+
+  public function getProfile()
+  {
+    $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
+    require_once '../Bonnefete/src/App/Views/users/profile.php';
+  }
+
+
+  public function postProfile()
+  {
+    $user = $_POST;
+    $message = $this->userModel->updateUser($user);
+    echo $message;
+    header('Location: /bonnefete/user/profile');
+  }
 }
