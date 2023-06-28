@@ -17,6 +17,8 @@ class HomeController
   }
 
 
+  //  make me a getIndex that retrieve all my user and post 
+
   public function getIndex()
   {
     $posts = $this->homeModel->getPosts();

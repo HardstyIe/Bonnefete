@@ -36,7 +36,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,FK_Post_Id FROM user WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user WHERE User_Email = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -65,7 +65,7 @@ class UserModel
 
   public function getAll()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,FK_Post_Id FROM user");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
