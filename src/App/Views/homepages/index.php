@@ -26,11 +26,13 @@
         <p><?php echo $post['Post_Article']; ?></p>
       </div>
 
-
-
-      <?php endforeach; ?>
     </div>
-  </div>
-  <?php endif; ?>
 
-  <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+
+
+    <?php endforeach; ?>
+  </div>
+</div>
+<?php endif; ?>
+
+<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>

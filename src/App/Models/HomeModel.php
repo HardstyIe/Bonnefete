@@ -16,7 +16,7 @@ class HomeModel
 
   public function getPosts()
   {
-    $sql = "SELECT Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id ";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id ";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute();
     return $query->fetchAll();
@@ -24,7 +24,7 @@ class HomeModel
 
   public function getPostById($id)
   {
-    $sql = "SELECT Post_Title,Post_Article,Post_CreateAt FROM post WHERE Post_Id = :id";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt FROM post WHERE Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
