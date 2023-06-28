@@ -1,6 +1,6 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
-<form action="../post/create" method="post">
+<div class="post-create"><form action="../post/create" method="post">
   <div>
     <label for="title">Titre</label>
     <input type="text" name="title" id="title">
@@ -14,7 +14,7 @@
     <input type="date" name="date" id="date">
 
   </div>
-  <button>Publier</button>
-</form>
+  <button class="post">Publier</button>
+</form></div>
 
 <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>

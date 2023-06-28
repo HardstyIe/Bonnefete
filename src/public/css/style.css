@@ -67,7 +67,7 @@ form {
   }
 
   label {
-    color: #38413d;
+    color: var(--main-color);
     margin: 1%;
   }
 
@@ -106,3 +106,5 @@ form {
     align-items: center;
     padding: 0  3px 4px 3px;
 }
+
+/* post create */
