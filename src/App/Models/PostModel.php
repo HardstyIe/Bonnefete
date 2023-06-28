@@ -18,12 +18,7 @@ class PostModel
 
   public function createPost($post)
   {
-    $sqlUser = "SELECT User_Id FROM user WHERE User_Email = :user";
-    $queryUser = $this->connection->getPDO()->prepare($sqlUser);
-    $queryUser->execute([
-      'user' => $_SESSION['user']["User_Email"]
-    ]);
-    $users = $queryUser->fetch();
+    $users = $_SESSION['user'];
     $date = new DateTime();
     $sql = "INSERT INTO post (Post_Title, Post_Article, Post_CreateAt, User_Id) VALUES (:title,  :content , :date , :user)";
     $query = $this->connection->getPDO()->prepare($sql);
@@ -31,7 +26,7 @@ class PostModel
       'title' => $post['title'],
       'content' => $post['content'],
       'date' => date("Y-m-d H:i:s"),
-      'user' => $users[0]
+      'user' => $users
     ]);
   }
 }

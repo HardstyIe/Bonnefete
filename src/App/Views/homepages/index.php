@@ -3,34 +3,35 @@
 
 
 <?php if (isset($_SESSION['user'])) : ?>
-  <div class="home-page">
-    <a class="btn-post" href="../post/create"><img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
+<div class="home-page">
+  <a class="btn-post w-full h-full" href="../post/create"><img
+      src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
 
-    <?php foreach ($posts as $post) : ?>
-      <div class="card">
-        <div class="card-header">
-          <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
-            <?php foreach ($users as $user) : ?>
-              <h3><?php echo $user['User_Name'] . ' ' . $user['User_Surname']; ?></h3>
-            <?php endforeach; ?>
-          </div>
-          <div class="card-name">
-            <h3>
-              <?php echo $post['Post_Title']; ?>
-            </h3>
-            <p>
-              <?php echo $post['Post_CreateAt']; ?>
-            </p>
-
-          </div>
-          <div class="card-body">
-            <p><?php echo $post['Post_Article']; ?></p>
-          </div>
-        </div>
-      <?php endforeach; ?>
+  <?php foreach ($posts as $post) : ?>
+  <div class="card">
+    <div class="card-header">
+      <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+        <?php foreach ($users as $user) : ?>
+        <h3><?php echo $user['User_Name'] . ' ' . $user['User_Surname']; ?></h3>
+        <?php endforeach; ?>
+      </div>
+      <div class="card-name">
+        <h3>
+          <?php echo $post['Post_Title']; ?>
+        </h3>
+        <p>
+          <?php echo $post['Post_CreateAt']; ?>
+        </p>
 
       </div>
+      <div class="card-body">
+        <p><?php echo $post['Post_Article']; ?></p>
+      </div>
+    </div>
+    <?php endforeach; ?>
 
-    <?php endif; ?>
+  </div>
 
-    <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+  <?php endif; ?>
+
+  <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>

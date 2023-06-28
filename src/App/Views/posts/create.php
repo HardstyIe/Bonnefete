@@ -9,7 +9,17 @@
     <label for="content">Contenu</label>
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
   </div>
+<<<<<<<<< Temporary merge branch 1
   <button>Publier</button>
 </form>
+=========
+  <div>
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date">
 
-<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+  </div>
+  <button class="post">Publier</button>
+</form></div>
+>>>>>>>>> Temporary merge branch 2
+
+  <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
