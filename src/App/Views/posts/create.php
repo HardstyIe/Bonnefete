@@ -1,6 +1,9 @@
+
+
+
+
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
-
-
+<div class="create-form">
   <form class="post-create" action="../post/create" method="post">
     <label for="title">Titre</label>
     <input type="text" name="title" id="title" required>
@@ -9,7 +12,5 @@
     <button id="post" >Publier</button>
     <button class="post">Publier</button>
   </form>
-
-
-
+</div>
 <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
