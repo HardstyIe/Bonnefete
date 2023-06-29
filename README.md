@@ -27,14 +27,8 @@ init the file using the following commands
 
 ```bash
  git clone git@github.com:HardstyIe/Bonnefete.git
-
- then use :
-
  cd Bonnefete
  composer install
-
- then go localhost/Bonnefete/user/login
- on your web brower then start to check the website
 ```
 
 ## Badges
