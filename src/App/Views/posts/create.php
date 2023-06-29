@@ -1,16 +1,16 @@
+
+
+
+
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
-
-<div class="post-create">
-  <form action="../post/create" method="post">
-    <div>
-      <label for="title">Titre</label>
-      <input type="text" name="title" id="title">
-    </div>
-    <div>
-      <label for="content">Contenu</label>
-      <textarea name="content" id="content" cols="30" rows="10"></textarea>
-    </div>
-    <button>Publier</button>
+<div class="create-form">
+  <form class="post-create" action="../post/create" method="post">
+    <label for="title">Titre</label>
+    <input type="text" name="title" id="title" required>
+    <label class="content" for="content">Contenu</label>
+    <textarea name="content" id="content" cols="30" rows="10" maxlength="200" required></textarea>
+    <button id="post" >Publier</button>
+    <button class="post">Publier</button>
   </form>
-
-  <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+</div>
+<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
