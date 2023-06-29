@@ -24,4 +24,12 @@ class HomeController
     $posts = $this->homeModel->getPosts();
     require_once '../Bonnefete/src/App/Views/homepages/index.php';
   }
+
+  // make me a getPostByUser that retrieve all the post for 1 User using the getpostbyuser function
+
+  public function getPostByUser()
+  {
+    $postCounts = $this->homeModel->getPosts();
+    require_once '../Bonnefete/src/App/Views/homepages/index.php';
+  }
 }

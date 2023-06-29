@@ -26,4 +26,20 @@ class PostController
     $message = $this->postModel->createPost($post);
     header('Location: /bonnefete/home/index');
   }
+
+  public function postUpdate()
+  {
+    $post = $_POST;
+    $message = $this->postModel->updatePost($post);
+    header('Location: /bonnefete/home/index');
+  }
+
+
+
+  public function postDelete()
+  {
+    $post = $_POST;
+    $message = $this->postModel->deletePost($post);
+    header('Location: /bonnefete/home/index');
+  }
 }

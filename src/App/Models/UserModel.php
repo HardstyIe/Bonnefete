@@ -36,7 +36,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,FK_Role_Id FROM user WHERE User_Email = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -65,11 +65,20 @@ class UserModel
 
   public function getAll()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
   }
+
+  public function getUserListWithPostCount()
+  {
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user INNER JOIN post ON FK_User_Id = User_Id GROUP BY User_Id");
+    $query->execute();
+    $users = $query->fetchAll();
+    return $users;
+  }
+
 
   public function getOneById($id)
   {

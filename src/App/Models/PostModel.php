@@ -34,4 +34,54 @@ class PostModel
       'user' => $users['User_Id']
     ]);
   }
+
+  public function getAllUserPost($user)
+  {
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
+    $query = $this->connection->getPdo()->prepare($sql);
+    $query->execute([
+      'user' => $user['User_Email']
+    ]);
+    return $query->fetchAll();
+  }
+
+  public function getPostById($id)
+  {
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt FROM post WHERE Post_Id = :id";
+    $query = $this->connection->getPdo()->prepare($sql);
+    $query->execute(['id' => $id]);
+    return $query->fetch();
+  }
+
+  public function updatePost($post)
+  {
+    try {
+      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article, Post_CreateAt = :date, User_Id = :user WHERE Post_Id = :id');
+      $query->execute([
+        'title' => $post['title'],
+        'article' => $post['article'],
+        'date' => $post['date'],
+        'user' => $post['user'],
+        'id' => $post['id'],
+      ]);
+      return " Bien Enregistré ";
+    } catch (\PDOException $e) {
+      var_dump($e->getMessage());
+      return " une erreur est survenue";
+    }
+  }
+
+  public function deletePost($id)
+  {
+    try {
+      $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE Post_Id = :id');
+      $query->execute([
+        'id' => $id,
+      ]);
+      return " Bien Supprimé ";
+    } catch (\PDOException $e) {
+      var_dump($e->getMessage());
+      return " une erreur est survenue";
+    }
+  }
 }

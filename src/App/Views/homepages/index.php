@@ -27,9 +27,8 @@
       </div>
     </div>
     <?php endforeach; ?>
-
   </div>
+</div>
+<?php endif; ?>
 
-  <?php endif; ?>
-
-  <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
+<?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
