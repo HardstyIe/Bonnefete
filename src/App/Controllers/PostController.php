@@ -27,19 +27,24 @@ class PostController
     header('Location: /bonnefete/home/index');
   }
 
+
+  public function getUpdate($id)
+  {
+    $post = $this->postModel->getPostById($id);
+    $message = $this->postModel->updatePost($post);
+    require_once '../Bonnefete/src/App/Views/posts/update.php';
+  }
+
   public function postUpdate()
   {
     $post = $_POST;
     $message = $this->postModel->updatePost($post);
     header('Location: /bonnefete/home/index');
   }
-
-
-
-  public function postDelete()
+  public function getDelete($id)
   {
-    $post = $_POST;
-    $message = $this->postModel->deletePost($post);
+    $message = $this->postModel->deletePost($id);
+    require_once '../Bonnefete/src/App/Views/posts/delete.php';
     header('Location: /bonnefete/home/index');
   }
 }

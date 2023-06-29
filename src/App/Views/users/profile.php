@@ -19,25 +19,21 @@
     </div>
   </div>
   <?php foreach ($post as $p) : ?>
-    <div class="card">
+    <div class="card w-3/5">
       <div class="card-header">
-        <div><img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
-          <h3><?php echo $p['User_Name'] . ' ' . $p['User_Surname'] ?></h3>
+        <div class="card-user">
+          <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+          <h3><?php echo $p['User_Name'] . ' ' . $p['User_Surname']; ?></h3>
         </div>
-        <div class="card-name">
-          <h3>
-            <?php echo $p['Post_Title']; ?>
-          </h3>
-          <p>
-            <?php echo $p['Post_CreateAt']; ?>
-          </p>
-
-        </div>
-        <div class="card-body">
-          <p><?php echo $p['Post_Article']; ?></p>
-        </div>
+        <h3><?php echo $p['Post_Title']; ?></h3>
+        <p><?php echo $p['Post_CreateAt']; ?></p>
       </div>
-    <?php endforeach; ?>
+      <div class="card-body">
+        <p><?php echo $p['Post_Article']; ?></p>
+      </div>
+    </div>
+
+  <?php endforeach; ?>
 </main>
 
 <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>

@@ -37,7 +37,7 @@ class PostModel
 
   public function getAllUserPost($user)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
       'user' => $user['User_Email']
@@ -48,6 +48,29 @@ class PostModel
   public function getPostById($id)
   {
     $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt FROM post WHERE Post_Id = :id";
+    $query = $this->connection->getPdo()->prepare($sql);
+    $query->execute(['id' => $id]);
+    return $query->fetch();
+  }
+
+
+
+  public function deletePost($id)
+  {
+    try {
+      $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE Post_Id = :id');
+      $query->execute([
+        'id' => $id
+      ]);
+      return " Bien Supprimé ";
+    } catch (\PDOException $e) {
+      var_dump($e->getMessage());
+      return " une erreur est survenue";
+    }
+  }
+  public function getOneById($id)
+  {
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
@@ -65,20 +88,6 @@ class PostModel
         'id' => $post['id'],
       ]);
       return " Bien Enregistré ";
-    } catch (\PDOException $e) {
-      var_dump($e->getMessage());
-      return " une erreur est survenue";
-    }
-  }
-
-  public function deletePost($id)
-  {
-    try {
-      $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE Post_Id = :id');
-      $query->execute([
-        'id' => $id,
-      ]);
-      return " Bien Supprimé ";
     } catch (\PDOException $e) {
       var_dump($e->getMessage());
       return " une erreur est survenue";

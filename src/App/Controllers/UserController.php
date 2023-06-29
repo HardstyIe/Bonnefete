@@ -64,6 +64,7 @@ class UserController
   {
     $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
     $post = $this->postModel->getAllUserPost($user);
+
     require_once '../Bonnefete/src/App/Views/users/profile.php';
   }
 

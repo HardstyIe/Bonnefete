@@ -36,7 +36,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,FK_Role_Id FROM user WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,FK_Role_Id,Role_Name FROM user INNER JOIN Role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -45,7 +45,9 @@ class UserModel
   }
   public function loginUser($user)
   {
-    $userFromDb = $this->getOneByEmail($user['email']);
+    $userFromDb = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $userFromDb->execute(['email' => $user['email']]);
+    $userFromDb = $userFromDb->fetch();
     if ($userFromDb) {
       if (password_verify($user['password'], $userFromDb['User_Password'])) {
         $_SESSION['user'] = $userFromDb;
@@ -65,7 +67,7 @@ class UserModel
 
   public function getAll()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
@@ -82,7 +84,7 @@ class UserModel
 
   public function getOneById($id)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id FROM user WHERE User_Id = :id");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
     $query->execute([
       'id' => $id,
     ]);

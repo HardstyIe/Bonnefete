@@ -31,8 +31,10 @@ init the file using the following commands
  then use :
 
  cd Bonnefete
- composer require
- npm install -g commitizen
+ composer install
+
+ then go localhost/Bonnefete/user/login
+ on your web brower then start to check the website
 ```
 
 ## Badges

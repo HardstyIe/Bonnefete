@@ -2,30 +2,30 @@
 
 namespace Bonnefete\App\Controllers;
 
-require('./src/App/Models/HomeModel.php');
+require_once('./src/App/Models/HomeModel.php');
+require_once('./src/App/Models/UserModel.php');
 
 use Bonnefete\App\Models\HomeModel;
+use Bonnefete\App\Models\UserModel;
 
 class HomeController
 {
 
   protected $homeModel;
+  protected $userModel;
 
   public function __construct()
   {
     $this->homeModel = new HomeModel();
+    $this->userModel = new UserModel();
   }
-
-
-  //  make me a getIndex that retrieve all my user and post 
 
   public function getIndex()
   {
     $posts = $this->homeModel->getPosts();
+    $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
     require_once '../Bonnefete/src/App/Views/homepages/index.php';
   }
-
-  // make me a getPostByUser that retrieve all the post for 1 User using the getpostbyuser function
 
   public function getPostByUser()
   {
