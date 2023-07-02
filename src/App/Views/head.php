@@ -18,7 +18,6 @@
 
     <?php if (isset($_SESSION['user'])) : ?>
       <div class="nav-user">
-        <!--  fait moi un <a>Liste des Utilisateur si l'utilisateur actuellement connecter possede le role Administrateur -->
         <?php if ($_SESSION['user']['Role_Name'] == "Administrateur") : ?>
           <a class="nav-user-list" href="/Bonnefete/user/userList">Liste des Utilisateurs</a>
         <?php endif; ?>

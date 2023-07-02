@@ -2,13 +2,13 @@
 
 
 
-<?php if (isset($_SESSION['user'])) : ?>
+<?php if (isset($_SESSION['user'])) :  ?>
   <div class="container">
     <div class="w-full h-full home-page">
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">
       </a>
-      <?php foreach ($posts as $post) : ?>
+      <?php foreach ($posts as $post) : var_dump($posts) ?>
         <div class="w-3/5 card">
           <div class="card-header">
             <div class="card-user">
@@ -21,12 +21,21 @@
           <div class="card-body">
             <p><?php echo $post['Post_Article']; ?></p>
           </div>
-          <!-- fait moi un bouton like , comment si l'utilisateur a pas encore like , si il a like , on met un bouton unlike , et si l'utilisateur est administrateur ou si l'utilisateur est le proprietaire du post , on affiche les boutons supprimer et modifier  -->
           <div class="card-footer flex">
             <div class="card-footer-left flex">
-              <a href="../post/like/<?php echo $post['Post_Id']; ?>">
-                <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like
-              </a>
+
+              <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
+                <button type="submit" name="like" class="btn-like">
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
+                  <p><?php echo $post['Post_Like']; ?></p>
+                </button>
+              </form>
+              <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
+                <button type="submit" name="dislike" class="btn-like">
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
+                </button>
+              </form>
+
               <a href="../post/comment/<?php echo $post['Post_Id']; ?>">
                 <img src="/Bonnefete/src/public/assets/icon/icons8-bulle-96.png" alt="">Comment
               </a>

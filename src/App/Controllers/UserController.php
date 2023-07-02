@@ -49,7 +49,6 @@ class UserController
     $user = $_POST;
     $message = $this->userModel->loginUser($user);
     echo $message;
-    header('Location: /bonnefete/home/index');
   }
 
 
@@ -100,6 +99,7 @@ class UserController
 
   public function getUserList()
   {
+
     $users = $this->userModel->getUserListWithPostCount();
     require_once '../Bonnefete/src/App/Views/users/userList.php';
   }

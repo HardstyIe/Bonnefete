@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
+  padding-top: 64px;
   /* background-image: url('/Bonnefete/src/public/assets/images/7158.jpg'); */
   background-size: 100%;
   background-attachment: fixed;
@@ -213,4 +214,27 @@ button {
 
 .card-user h3 {
   margin-left: 5px;
+}
+
+.btn-like {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-like img {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-like-red {
+  /* Ajoutez ici les styles pour le bouton like actif (coeur rouge) */
+  color: red;
+}
+
+.btn-like-white {
+  /* Ajoutez ici les styles pour le bouton like inactif (coeur blanc) */
+  color: white;
 }

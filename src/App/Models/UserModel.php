@@ -2,10 +2,7 @@
 
 namespace Bonnefete\App\Models;
 
-
 use Bonnefete\Bootstrap\Database;
-
-
 
 class UserModel
 {
@@ -51,7 +48,7 @@ class UserModel
     if ($userFromDb) {
       if (password_verify($user['password'], $userFromDb['User_Password'])) {
         $_SESSION['user'] = $userFromDb;
-        header('Location: /bonnefete/user/register');
+        header('Location: /bonnefete/home/index');
       } else {
         return "Mot de passe incorrect";
       }
@@ -75,12 +72,11 @@ class UserModel
 
   public function getUserListWithPostCount()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user INNER JOIN post ON FK_User_Id = User_Id GROUP BY User_Id");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user INNER JOIN post ON FK_User_Id = User_Id GROUP BY User_Email");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
   }
-
 
   public function getOneById($id)
   {
