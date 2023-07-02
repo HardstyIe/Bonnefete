@@ -16,7 +16,7 @@ class HomeModel
 
   public function getPosts()
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id ";
+    $sql = "SELECT COUNT(likes.FK_User_Id) AS LikeCount, post.Post_Article, post.Post_Title, post.Post_CreateAt, post.Post_Id, post.FK_User_Id,user.User_Email,user.User_Name,user.User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id INNER JOIN likes ON post.Post_Id = likes.FK_Post_Id GROUP BY Post_Id ORDER BY Post_CreateAt DESC";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute();
     return $query->fetchAll();

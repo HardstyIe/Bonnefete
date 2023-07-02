@@ -8,7 +8,7 @@
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">
       </a>
-      <?php foreach ($posts as $post) : var_dump($posts) ?>
+      <?php foreach ($posts as $post) :  ?>
         <div class="w-3/5 card">
           <div class="card-header">
             <div class="card-user">
@@ -21,16 +21,22 @@
           <div class="card-body">
             <p><?php echo $post['Post_Article']; ?></p>
           </div>
-          <div class="card-footer flex">
-            <div class="card-footer-left flex">
+          <div class="flex card-footer">
+            <div class="flex card-footer-left">
 
               <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
+                <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
+                <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
                 <button type="submit" name="like" class="btn-like">
                   <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
-                  <p><?php echo $post['Post_Like']; ?></p>
+                  <p><?php echo $post['LikeCount']; ?></p>
                 </button>
+
               </form>
+
               <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
+                <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
+                <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
                 <button type="submit" name="dislike" class="btn-like">
                   <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
                 </button>
@@ -40,7 +46,7 @@
                 <img src="/Bonnefete/src/public/assets/icon/icons8-bulle-96.png" alt="">Comment
               </a>
             </div>
-            <div class="card-footer-right flex">
+            <div class="flex card-footer-right">
               <?php if ($_SESSION['user']['User_Email'] == $post['User_Email'] || $_SESSION['user']['Role_Name'] == "Administrateur") :  ?>
                 <a href="../post/update/<?php echo $post['Post_Id']; ?>">
 

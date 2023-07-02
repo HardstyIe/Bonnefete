@@ -80,10 +80,4 @@ class LikeController
     echo $message;
     echo '<a href="../like/likeCount"> LikeCount </a>';
   }
-
-  function checkIfLiked($postId, $userId)
-  {
-    $isLiked = $this->likeModel->isLiked($postId, $userId);
-    return $isLiked;
-  }
 }

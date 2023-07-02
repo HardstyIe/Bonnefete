@@ -2,8 +2,9 @@
 
 namespace Bonnefete\App\Models;
 
+
+
 use Bonnefete\Bootstrap\Database;
-use PDO;
 
 class LikeModel
 {
@@ -73,20 +74,5 @@ class LikeModel
       'FK_User_Id' => $like['FK_User_Id']
     ]);
     return 'Like deleted';
-  }
-
-  public function isLiked($postId, $userId)
-  {
-    $sql = "SELECT COUNT(Like_Id) as likeCount FROM likes WHERE FK_Post_Id = :postId AND FK_User_Id = :userId";
-    $query = $this->connection->getPdo()->prepare($sql);
-    $query->execute([
-      'postId' => $postId,
-      'userId' => $userId
-    ]);
-
-    $result = $query->fetch(PDO::FETCH_ASSOC);
-    $likeCount = $result['likeCount'];
-
-    return ($likeCount > 0);
   }
 }
