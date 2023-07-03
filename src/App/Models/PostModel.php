@@ -37,7 +37,7 @@ class PostModel
 
   public function getAllUserPost($user)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
       'user' => $user['User_Email']
@@ -76,16 +76,16 @@ class PostModel
     return $query->fetch();
   }
 
+
   public function updatePost($post)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article, Post_CreateAt = :date, User_Id = :user WHERE Post_Id = :id');
+      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article WHERE Post_Id = :id');
+      var_dump($post);
       $query->execute([
         'title' => $post['title'],
         'article' => $post['article'],
-        'date' => $post['date'],
-        'user' => $post['user'],
-        'id' => $post['id'],
+        'id' => $post['id']
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {

@@ -23,24 +23,31 @@
           </div>
           <div class="flex card-footer">
             <div class="flex card-footer-left">
-
-              <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
-                <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
-                <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
-                <button type="submit" name="like" class="btn-like">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
-                  <p><?php echo $post['LikeCount']; ?></p>
-                </button>
-
               </form>
 
-              <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
-                <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
-                <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
-                <button type="submit" name="dislike" class="btn-like">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">
-                </button>
-              </form>
+              <?php foreach ($likes as $like) :  ?>
+                <?php if (($post['FK_User_Id'] && $post['Post_Id']) === ($post['LikeUserId'] && $post['Post_Id'])) : ?>
+                  <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
+                    <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
+                    <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
+                    <button type="submit" name="dislike" class="btn-like">
+                      <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Unlike
+                      <p><?php echo $post['LikeCount']; ?></p>
+                    </button>
+                  </form>
+
+                <?php else : ?>
+                  <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
+                    <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
+                    <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
+                    <button type="submit" name="like" class="btn-like">
+                      <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like
+                      <p><?php echo $post['LikeCount']; ?></p>
+                    </button>
+                  </form>
+                <?php endif; ?>
+
+              <?php endforeach; ?>
 
               <a href="../post/comment/<?php echo $post['Post_Id']; ?>">
                 <img src="/Bonnefete/src/public/assets/icon/icons8-bulle-96.png" alt="">Comment

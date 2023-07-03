@@ -72,7 +72,7 @@ class UserModel
 
   public function getUserListWithPostCount()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user INNER JOIN post ON FK_User_Id = User_Id GROUP BY User_Email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user LEFT JOIN post ON FK_User_Id = User_Id GROUP BY User_Email");
     $query->execute();
     $users = $query->fetchAll();
     return $users;

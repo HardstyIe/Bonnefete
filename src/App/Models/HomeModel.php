@@ -16,7 +16,7 @@ class HomeModel
 
   public function getPosts()
   {
-    $sql = "SELECT COUNT(likes.FK_User_Id) AS LikeCount, post.Post_Article, post.Post_Title, post.Post_CreateAt, post.Post_Id, post.FK_User_Id,user.User_Email,user.User_Name,user.User_Surname FROM post INNER JOIN user ON FK_User_Id = User_Id INNER JOIN likes ON post.Post_Id = likes.FK_Post_Id GROUP BY Post_Id ORDER BY Post_CreateAt DESC";
+    $sql = "SELECT COUNT(likes.FK_User_Id) AS LikeCount, post.Post_Article, post.Post_Title, post.Post_CreateAt, post.Post_Id, post.FK_User_Id,user.User_Email,user.User_Name,user.User_Surname,likes.FK_User_Id AS LikeUserId,likes.FK_Post_Id AS LikePostId FROM post INNER JOIN user ON FK_User_Id = User_Id LEFT JOIN likes ON post.Post_Id = likes.FK_Post_Id GROUP BY Post_Id,LikeUserId,LikePostId ORDER BY Post_CreateAt DESC";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute();
     return $query->fetchAll();
@@ -42,13 +42,11 @@ class HomeModel
   public function updatePost($post)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article, Post_CreateAt = :date, User_Id = :user WHERE Post_Id = :id');
+      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article WHERE Post_Id = :id');
       $query->execute([
         'title' => $post['title'],
         'article' => $post['article'],
-        'date' => $post['date'],
-        'user' => $post['user'],
-        'id' => $post['id'],
+        'id' => $post['Post_Id']
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {

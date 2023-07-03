@@ -24,35 +24,7 @@ class LikeModel
     $likes = $query->fetchAll();
     return $likes;
   }
-
-  public function getLikesByPostId($id)
-  {
-    $sql = "SELECT Like_Id,FK_Post_Id,FK_User_Id,COUNT(FK_Post_Id) as Like_Count FROM likes WHERE FK_Post_Id = :id";
-    $query = $this->connection->getPdo()->prepare($sql);
-
-    $query->execute(['id' => $id]);
-    $likes = $query->fetch();
-    var_dump($likes);
-    return $likes;
-  }
-
-  public function getLikesByUserId($id)
-  {
-    $sql = "SELECT Like_Id,FK_Post_Id,FK_User_Id FROM likes WHERE FK_User_Id = :id";
-    $query = $this->connection->getPdo()->prepare($sql);
-    $query->execute(['id' => $id]);
-    $likes = $query->fetchAll();
-    return $likes;
-  }
-
-  public function getLikeById($id)
-  {
-    $sql = "SELECT Like_Id,FK_Post_Id,FK_User_Id FROM likes WHERE Like_Id = :id";
-    $query = $this->connection->getPdo()->prepare($sql);
-    $query->execute(['id' => $id]);
-    $like = $query->fetch();
-    return $like;
-  }
+  // fait moi un getLikeByPost qui permet d'avoir un like selon l'utilisateur et le post visiter
 
   public function createLike($like)
   {

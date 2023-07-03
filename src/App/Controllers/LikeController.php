@@ -65,19 +65,6 @@ class LikeController
     );
     $message = $this->likeModel->deleteLike($dislike);
     echo $message;
-    header('Location:../home/index');
-  }
-
-  public function getLikeCount()
-  {
-    require_once '../Bonnefete/src/App/Views/likes/likeCount.php';
-  }
-
-  public function postLikeCount()
-  {
-    $likeCount = $_POST;
-    $message = $this->likeModel->getLikesByPostId($likeCount);
-    echo $message;
-    echo '<a href="../like/likeCount"> LikeCount </a>';
+    header('Location:/Bonnefete/home/index');
   }
 }

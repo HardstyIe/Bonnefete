@@ -28,10 +28,10 @@ class PostController
   }
 
 
+  //  fait moi un getUpdate et un postUpdate qui permet de update le Post_Title et le Post_Article du post sur lequel je clique
   public function getUpdate($id)
   {
     $post = $this->postModel->getPostById($id);
-    $message = $this->postModel->updatePost($post);
     require_once '../Bonnefete/src/App/Views/posts/update.php';
   }
 
