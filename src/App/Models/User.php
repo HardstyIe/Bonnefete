@@ -91,9 +91,4 @@ class User
   {
     return $this->roleName;
   }
-
-  public function setRoleName(string $roleName): void
-  {
-    $this->roleName = $roleName;
-  }
 }

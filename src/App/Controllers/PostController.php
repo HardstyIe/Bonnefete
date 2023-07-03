@@ -35,8 +35,19 @@ class PostController
     header('Location: /bonnefete/home/index');
   }
 
+  public function getCreateComment()
+  {
+    $posts = $this->homeModel->getPosts();
+    require_once '../Bonnefete/src/App/Views/posts/createComment.php';
+  }
 
-  //  fait moi un getUpdate et un postUpdate qui permet de update le Post_Title et le Post_Article du post sur lequel je clique
+  public function postCreateComment()
+  {
+    $comment = $_POST;
+    $message = $this->postModel->createComment($comment);
+    header('Location: /bonnefete/home/index');
+  }
+
   public function getUpdate($id)
   {
     $post = $this->postModel->getPostById($id);
