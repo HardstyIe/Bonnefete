@@ -29,7 +29,6 @@ class HomeController
   {
 
     $posts = $this->homeModel->getPosts();
-    $likes = $this->likeModel->getLikes($posts);
     $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
     require_once '../Bonnefete/src/App/Views/homepages/index.php';
   }

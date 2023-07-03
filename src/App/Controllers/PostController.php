@@ -3,16 +3,24 @@
 namespace Bonnefete\App\Controllers;
 
 require_once('./src/App/Models/PostModel.php');
+require_once('./src/App/Models/HomeModel.php');
+require_once('./src/App/Models/LikeModel.php');
 
 use Bonnefete\App\Models\PostModel;
+use Bonnefete\App\Models\LikeModel;
+use Bonnefete\App\Models\HomeModel;
 
 class PostController
 {
   protected $postModel;
+  protected $homeModel;
+  protected $likeModel;
 
   public function __construct()
   {
     $this->postModel = new PostModel();
+    $this->homeModel = new HomeModel();
+    $this->likeModel = new LikeModel();
   }
 
   public function getCreate()
@@ -46,5 +54,11 @@ class PostController
     $message = $this->postModel->deletePost($id);
     require_once '../Bonnefete/src/App/Views/posts/delete.php';
     header('Location: /bonnefete/home/index');
+  }
+
+  public function getComment()
+  {
+    $posts = $this->homeModel->getPosts();
+    require_once '../Bonnefete/src/App/Views/posts/comment.php';
   }
 }
