@@ -35,17 +35,18 @@ class PostController
     header('Location: /bonnefete/home/index');
   }
 
-  public function getCreateComment()
+  public function getCreateComment($id)
   {
-    $posts = $this->homeModel->getPosts();
+    $posts = $this->homeModel->getPostById($id);
     require_once '../Bonnefete/src/App/Views/posts/createComment.php';
   }
 
   public function postCreateComment()
   {
     $comment = $_POST;
+    $id = $_POST['FK_Post_Id'];
     $message = $this->postModel->createComment($comment);
-    header('Location: /bonnefete/home/index');
+    header("Location: /bonnefete/post/comment/$id");
   }
 
   public function getUpdate($id)

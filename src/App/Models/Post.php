@@ -4,7 +4,7 @@ namespace Bonnefete\App\Models;
 
 class Home
 {
-
+  protected $postId;
   protected $title;
 
   protected $author;
@@ -19,7 +19,7 @@ class Home
 
   protected $CommentDate;
 
-  public function __construct($title, $author, $content, $date, $CommentArticle, $CommentAuthor, $CommentDate)
+  public function __construct($title, $author, $content, $date, $CommentArticle, $CommentAuthor, $CommentDate, $postId)
   {
     $this->title = $title;
     $this->author = $author;
@@ -28,6 +28,7 @@ class Home
     $this->CommentArticle = $CommentArticle;
     $this->CommentAuthor = $CommentAuthor;
     $this->CommentDate = $CommentDate;
+    $this->postId = $postId;
   }
 
   public function getTitle(): string
@@ -111,6 +112,18 @@ class Home
   {
     if (strlen($CommentDate) > 2) {
       $this->CommentDate = $CommentDate;
+    }
+  }
+
+  public function getPostId(): string
+  {
+    return $this->postId;
+  }
+
+  public function setPostId(string $postId): void
+  {
+    if (strlen($postId) > 2) {
+      $this->postId = $postId;
     }
   }
 }
