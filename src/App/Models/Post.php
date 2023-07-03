@@ -13,12 +13,21 @@ class Home
 
   protected $date;
 
-  public function __construct($title, $author, $content, $date)
+  protected $CommentArticle;
+
+  protected $CommentAuthor;
+
+  protected $CommentDate;
+
+  public function __construct($title, $author, $content, $date, $CommentArticle, $CommentAuthor, $CommentDate)
   {
     $this->title = $title;
     $this->author = $author;
     $this->content = $content;
     $this->date = $date;
+    $this->CommentArticle = $CommentArticle;
+    $this->CommentAuthor = $CommentAuthor;
+    $this->CommentDate = $CommentDate;
   }
 
   public function getTitle(): string
@@ -66,6 +75,42 @@ class Home
   {
     if (strlen($date) > 2) {
       $this->date = $date;
+    }
+  }
+
+  public function getCommentArticle(): string
+  {
+    return $this->CommentArticle;
+  }
+
+  public function setCommentArticle(string $CommentArticle): void
+  {
+    if (strlen($CommentArticle) > 2) {
+      $this->CommentArticle = $CommentArticle;
+    }
+  }
+
+  public function getCommentAuthor(): string
+  {
+    return $this->CommentAuthor;
+  }
+
+  public function setCommentAuthor(string $CommentAuthor): void
+  {
+    if (strlen($CommentAuthor) > 2) {
+      $this->CommentAuthor = $CommentAuthor;
+    }
+  }
+
+  public function getCommentDate(): string
+  {
+    return $this->CommentDate;
+  }
+
+  public function setCommentDate(string $CommentDate): void
+  {
+    if (strlen($CommentDate) > 2) {
+      $this->CommentDate = $CommentDate;
     }
   }
 }

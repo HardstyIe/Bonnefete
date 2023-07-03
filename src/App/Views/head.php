@@ -24,7 +24,7 @@
 
         <a class="nav-user-profile" href="/Bonnefete/user/MyProfile">Profil</a>
         <a class="nav-quit" href="../user/logout">Se déconnecter</a>
-        <div class="nav-user-id"><a href="">
+        <div class="nav-user-id"><a href="/Bonnefete/user/MyProfile">
             <img class="nav-img-user" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt=""></a>
           <a class="nav-user-name">
             <?php echo $_SESSION['user']['User_Name'] . ' ' . $_SESSION['user']['User_Surname']; ?>

@@ -70,7 +70,7 @@ class PostModel
   }
   public function getOneById($id)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
@@ -85,30 +85,11 @@ class PostModel
       $query->execute([
         'title' => $post['title'],
         'article' => $post['article'],
-        'id' => $post['id']
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {
       var_dump($e->getMessage());
       return " une erreur est survenue";
     }
-  }
-
-  public function createComment($comment)
-  {
-    $sqlUser = "SELECT User_Id FROM user WHERE User_Email = :user";
-    $queryUser = $this->connection->getPDO()->prepare($sqlUser);
-    $queryUser->execute([
-      'user' => $_SESSION['user']["User_Email"]
-    ]);
-    $users = $queryUser->fetch();
-    $sql = "INSERT INTO comment (Comment_Content, Comment_CreateAt, FK_User_Id, FK_Post_Id) VALUES (:content, :date, :user, :post)";
-    $query = $this->connection->getPDO()->prepare($sql);
-    $query->execute([
-      'content' => $comment['content'],
-      'date' => date("Y-m-d H:i:s"),
-      'user' => $users['User_Id'],
-      'post' => $comment['post']
-    ]);
   }
 }

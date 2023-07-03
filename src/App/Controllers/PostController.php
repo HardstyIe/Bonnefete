@@ -62,17 +62,4 @@ class PostController
     $comments = $this->homeModel->getCommentByPostId($id);
     require_once '../Bonnefete/src/App/Views/posts/comment.php';
   }
-
-  public function getCreateComment($id)
-  {
-    $post = $this->postModel->getPostById($id);
-    require_once '../Bonnefete/src/App/Views/posts/createComment.php';
-  }
-
-  public function postCreateComment()
-  {
-    $comment = $_POST;
-    $message = $this->postModel->createComment($comment);
-    header('Location: /bonnefete/home/index');
-  }
 }

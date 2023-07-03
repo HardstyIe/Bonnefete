@@ -24,6 +24,8 @@
           </div>
         </div>
       </div>
+      <h1 class="font-black text-neutral-900 text-center text-4xl">Commentaires</h1>
+
       <?php foreach ($comments as $comment) : ?>
         <div class="w-3/5 card">
           <div class="card-header">
