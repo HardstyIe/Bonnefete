@@ -25,11 +25,9 @@
             <div class="flex card-footer-left">
               </form>
 
-              <?php if ($_SESSION['user']['User_Id'] === $post['LikeUserId'] && $post['Post_Id'] === $post['LikePostId']) { ?>
-                <?php echo $_SESSION['user']['User_Id']; ?>
-                <?php echo $post['LikeUserId']  ?>
-                <?php echo $post['LikePostId']  ?>
-                <?php echo $post['Post_Id']  ?>
+
+              <?php if (($_SESSION['user']['User_Id'] === $post['LikeUserId'] && $post['Post_Id'] === $post['LikePostId'])) { ?>
+
                 <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
                   <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
                   <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
@@ -40,10 +38,7 @@
                 </form>
 
               <?php } else { ?>
-                <?php echo $_SESSION['user']['User_Id']; ?>
-                <?php echo $post['LikeUserId']  ?>
-                <?php echo $post['LikePostId']  ?>
-                <?php echo $post['Post_Id']  ?>
+
                 <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
                   <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
                   <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
@@ -52,7 +47,6 @@
                     <p><?php echo $post['LikeCount']; ?></p>
                   </button>
                 </form>
-
               <?php } ?>
 
               <a href="../post/comment/<?php echo $post['Post_Id']; ?>">

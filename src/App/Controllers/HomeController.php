@@ -38,4 +38,27 @@ class HomeController
     $postCounts = $this->homeModel->getPosts();
     require_once '../Bonnefete/src/App/Views/homepages/index.php';
   }
+
+  public function getComment($id)
+  {
+    $post = $this->homeModel->getPostById($id);
+    $comments = $this->homeModel->getCommentByPostId($id);
+    require_once '../Bonnefete/src/App/Views/posts/comment.php';
+  }
+
+  public function postComment()
+  {
+    $FK_Post_Id = $_POST['FK_Post_Id'];
+    $FK_User_Id = $_POST['FK_User_Id'];
+    $Comment_Content = $_POST['Comment_Content'];
+
+    $comment = array(
+      'FK_Post_Id' => $FK_Post_Id,
+      'FK_User_Id' => $FK_User_Id,
+      'Comment_Content' => $Comment_Content
+    );
+    $message = $this->homeModel->createComment($comment);
+    echo $message;
+    header('Location:/Bonnefete/home/index');
+  }
 }
