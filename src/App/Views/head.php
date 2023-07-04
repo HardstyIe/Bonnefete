@@ -18,8 +18,11 @@
 
     <?php if (isset($_SESSION['user'])) : ?>
       <div class="nav-user">
-        <?php if ($_SESSION['user']['Role_Name'] == "Administrateur") : ?>
+        <?php if ($_SESSION['user']['Role_Name'] == "Administrateur" || $_SESSION['user']['Role_Name'] == "SuperAdministrateur") : ?>
           <a class="nav-user-list" href="/Bonnefete/user/userList">Liste des Utilisateurs</a>
+          <?php if ($_SESSION['user']['Role_Name'] == "SuperAdministrateur") : ?>
+            <a class="nav-user-list" href="/Bonnefete/user/log">Liste des Logs</a>
+          <?php endif; ?>
         <?php endif; ?>
 
         <a class="nav-user-profile" href="/Bonnefete/user/MyProfile">Profil</a>

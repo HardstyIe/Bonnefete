@@ -6,7 +6,6 @@ require 'src/App/Controllers/UserController.php';
 require 'src/App/Controllers/RoleController.php';
 require 'src/App/Controllers/HomeController.php';
 require 'src/App/Controllers/PostController.php';
-require 'src/App/Controllers/CommentController.php';
 require 'src/App/Controllers/LikeController.php';
 
 class Router

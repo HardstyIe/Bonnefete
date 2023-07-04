@@ -54,15 +54,25 @@
               </a>
             </div>
             <div class="flex card-footer-right">
-              <?php if ($_SESSION['user']['User_Email'] == $post['User_Email'] || $_SESSION['user']['Role_Name'] == "Administrateur") :  ?>
-                <a href="../post/update/<?php echo $post['Post_Id']; ?>">
+              <!--  fait moi un beau truc , si le user log et le l'email de l'autheur corresponde , on a le bouton supprimer et modifier , si le user log est Administrateur ou SuperAdministrateur , on a le button supprimer -->
 
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-modifier-96.png" alt="">Modifier
+              <?php if (($_SESSION['user']['User_Email'] === $post['User_Email'])) { ?>
+                <a href="../post/edit/<?php echo $post['Post_Id']; ?>">
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-modifier-96.png" alt="">Edit
                 </a>
                 <a href="../post/delete/<?php echo $post['Post_Id']; ?>">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">supprimer
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">Delete
                 </a>
-              <?php endif; ?>
+
+              <?php } else if ($_SESSION['user']['Role_Name'] == 'Administrateur' || $_SESSION['user']['Role_Name'] == 'SuperAdministrateur') { ?>
+                <a href="../post/delete/<?php echo $post['Post_Id']; ?>">
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">Delete
+                </a>
+              <?php } ?>
+
+
+
+
             </div>
           </div>
         </div>
