@@ -2,6 +2,7 @@
   --main-color: #38413d;
   --second-color: #d9d9d9;
   --valid-color: green;
+  --delete-color: red;
   --opacity-color: linear-gradient(90deg, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 0.8169468470982143) 0%);
 }
 
@@ -37,7 +38,7 @@ nav {
 
 .nav-user {
   font-size: 1.3em;
-  width: 25%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -216,25 +217,65 @@ button {
   margin-left: 5px;
 }
 
-.btn-like {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
+.comment-post {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.btn-like img {
-  width: 24px;
-  height: 24px;
+.edit-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn-like {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-post {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .btn-like-red {
   /* Ajoutez ici les styles pour le bouton like actif (coeur rouge) */
-  color: red;
+  color: var(--delete-color);
 }
 
 .btn-like-white {
   /* Ajoutez ici les styles pour le bouton like inactif (coeur blanc) */
-  color: white;
+  color: var(--second-color);
+}
+
+/* profil utilisateur */
+
+.card-footer {
+  font-size: 1em;
+  color: var(--main-color);
+  width: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-like form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.like-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-footer img {
+  width: 20px;
 }
