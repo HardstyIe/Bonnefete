@@ -28,22 +28,22 @@ class HomeModel
     user.User_Surname,
     likes.FK_User_Id AS LikeUserId,
     likes.FK_Post_Id AS LikePostId,
-    IF (IF (likes.FK_User_Id=:userId, 1, 0)=IF (likes.FK_Post_Id=post.Post_Id, 1, 0), 1, 0) AS isLiked
-FROM
+    IF (IF (likes.FK_User_Id=:userId, 1, 0)=IF (likes.FK_Post_Id=post.Post_Id, 1, 0), 1, 0) AS isLiked,
+    images.Image_Name
+  FROM
     post
-INNER JOIN user
-ON
-    FK_User_Id = User_Id
-LEFT JOIN likes
-ON
-    post.Post_Id = likes.FK_Post_Id
-GROUP BY
+  INNER JOIN user
+    ON FK_User_Id = User_Id
+  LEFT JOIN likes
+    ON post.Post_Id = likes.FK_Post_Id
+  LEFT JOIN images
+    ON post.FK_Image_Id = images.Image_Id
+  GROUP BY
     Post_Id,
     LikeUserId,
     LikePostId
-ORDER BY
-    Post_CreateAt
-DESC;";
+  ORDER BY
+    Post_CreateAt DESC;";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(
       [
@@ -53,6 +53,7 @@ DESC;";
 
     return $query->fetchAll();
   }
+
 
   public function getPostById($id)
   {
