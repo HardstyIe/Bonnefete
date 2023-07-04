@@ -236,6 +236,12 @@ button {
   justify-content: space-between;
 }
 
+.btn-like p {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
 .delete-post {
   display: flex;
   flex-direction: row;
@@ -276,6 +282,8 @@ button {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .card-footer img {
   width: 20px;
+  padding-right: 5px;
 }

@@ -42,9 +42,9 @@
                   <div class="like-post">
                   <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
                   <button type="submit" name="like" class="btn-like">
-                    <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like</div>
+                    <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like
                     <p><?php echo $post['LikeCount']; ?></p>
-                  </button>
+                  </button></div>
                 </form>
               <?php } ?></div>
 
