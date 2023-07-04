@@ -25,19 +25,35 @@ class PostModel
     ]);
     $users = $queryUser->fetch();
     $date = new DateTime();
-    $sql = "INSERT INTO post (Post_Title, Post_Article, Post_CreateAt, FK_User_Id) VALUES (:title,  :content , :date , :user)";
+
+    $imageData = file_get_contents($_FILES['image']['tmp_name']);
+    $imageName = $_FILES['image']['name'];
+    $destination = realpath($_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesPost/') . '/' . $imageName;
+
+    move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+
+    $sqlImage = "INSERT INTO images (Image_Name) VALUES (:imageName)";
+    $queryImage = $this->connection->getPDO()->prepare($sqlImage);
+    $queryImage->execute([
+      'imageName' => $imageName
+    ]);
+    $imageId = $this->connection->getPDO()->lastInsertId();
+
+    $sql = "INSERT INTO post (Post_Title, Post_Article, Post_CreateAt, FK_User_Id, FK_Image_Id) VALUES (:title,  :content , :date , :user, :imageId)";
     $query = $this->connection->getPDO()->prepare($sql);
     $query->execute([
       'title' => $post['title'],
       'content' => $post['content'],
       'date' => date("Y-m-d H:i:s"),
-      'user' => $users['User_Id']
+      'user' => $users['User_Id'],
+      'imageId' => $imageId
     ]);
   }
 
+
   public function getAllUserPost($user)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname,User_Email,User_Avatar FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE User_Email = :user";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
       'user' => $user['User_Email']
@@ -70,7 +86,7 @@ class PostModel
   }
   public function getOneById($id)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
+    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,Post_Like,Post_Comment,User_Name,User_Surname,User_Email,User_Avatar FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
@@ -114,7 +130,7 @@ class PostModel
 
   public function getAllComment($id)
   {
-    $sql = "SELECT Comment_Id,Comment_Content,Comment_CreateAt,FK_User_Id,FK_Post_Id,User_Name,User_Surname,User_Email FROM comment INNER JOIN user ON FK_User_Id = User_Id WHERE FK_Post_Id = :id";
+    $sql = "SELECT Comment_Id,Comment_Content,Comment_CreateAt,FK_User_Id,FK_Post_Id,User_Name,User_Surname,User_Email,User_Avatar FROM comment INNER JOIN user ON FK_User_Id = User_Id WHERE FK_Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
       'id' => $id
@@ -125,7 +141,7 @@ class PostModel
 
   public function getCommentById($id)
   {
-    $sql = "SELECT Comment_Id,Comment_Content,Comment_CreateAt,FK_User_Id,FK_Post_Id,User_Name,User_Surname,User_Email FROM comment INNER JOIN user ON FK_User_Id = User_Id WHERE Comment_Id = :id";
+    $sql = "SELECT Comment_Id,Comment_Content,Comment_CreateAt,FK_User_Id,FK_Post_Id,User_Name,User_Surname,User_Email,User_Avatar FROM comment INNER JOIN user ON FK_User_Id = User_Id WHERE Comment_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();

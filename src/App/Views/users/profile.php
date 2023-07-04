@@ -13,8 +13,8 @@
       <p>Email : <?= $user['User_Email'] ?></p>
       <p>Nombre de Post publié : <?= count($post) ?></p>
       <div>
-        <a href="../user/edit">Modifier</a>
-        <a href="../user/delete">Supprimer</a>
+        <a href="../user/update/<?php echo $user['User_Id']; ?>">Modifier</a>
+        <a href="../user/delete/<?php echo $user['User_Id']; ?>">Supprimer</a>
       </div>
     </div>
   </div>

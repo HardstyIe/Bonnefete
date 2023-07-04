@@ -1,6 +1,10 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
-
+<?php
+// $user contient les informations de l'utilisateur, récupérées par la fonction getOneById() par exemple.
+$avatarPath = '/Bonnefete/src/public/assets/avatars/' . $user['User_Avatar'];
+$defaultAvatarPath = '/Bonnefete/src/public/assets/imagesAvatar/photo-avatar-profil.png'; // Chemin de l'image par défaut
+?>
 
 <?php if (isset($_SESSION['user'])) :  ?>
   <div class="container">
@@ -8,7 +12,7 @@
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">
       </a>
-      <?php foreach ($posts as $post) :  ?>
+      <?php foreach ($posts as $post) : ?>
         <div class="w-3/5 card">
           <div class="card-header">
             <div class="card-user">
@@ -19,7 +23,12 @@
             <p><?php echo $post['Post_CreateAt']; ?></p>
           </div>
           <div class="card-body">
-            <p><?php echo $post['Post_Article']; ?></p>
+            <p><?php echo $post['Post_Article']; ?>
+              <?php if (!empty($post['Image_Name'])) : ?>
+                <img src="/Bonnefete/src/public/assets/imagesPost/<?= $post['Image_Name'] ?>" alt="Image du post">
+              <?php endif; ?>
+            </p>
+
           </div>
           <div class="flex card-footer">
             <div class="flex card-footer-left">

@@ -110,4 +110,49 @@ class UserController
     $post = $this->postModel->getAllUserPost($user);
     require_once '../Bonnefete/src/App/Views/users/userList.php';
   }
+
+  public function getUpdate($id)
+  {
+    $user = $this->userModel->getOneById($id);
+    require_once '../Bonnefete/src/App/Views/users/update.php';
+  }
+
+  public function postUpdate()
+  {
+    $id = $_POST['id'];
+    $email = $_POST['email'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    $user = [
+      'id' => $id,
+      'email' => $email,
+      'nom' => $nom,
+      'prenom' => $prenom,
+      'password' => $password,
+      'role' => $role
+    ];
+
+    $message = $this->userModel->updateUser($user);
+    var_dump($_POST);
+    echo $message;
+    header('Location: /bonnefete/user/MyProfile');
+  }
+
+
+  public function getDeleteUser($id)
+  {
+    $user = $this->userModel->getOneById($id);
+    require_once '../Bonnefete/src/App/Views/users/delete.php';
+  }
+
+  public function postDeleteUser()
+  {
+    $user = $_POST;
+    $message = $this->userModel->deleteUser($user);
+    echo $message;
+    header('Location: /bonnefete/user/userList');
+  }
 }

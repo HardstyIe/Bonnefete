@@ -33,7 +33,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,FK_Role_Id,Role_Name FROM user INNER JOIN Role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN Role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -42,7 +42,7 @@ class UserModel
   }
   public function loginUser($user)
   {
-    $userFromDb = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $userFromDb = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
     $userFromDb->execute(['email' => $user['email']]);
     $userFromDb = $userFromDb->fetch();
     if ($userFromDb) {
@@ -80,7 +80,7 @@ class UserModel
 
   public function getOneById($id)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
     $query->execute([
       'id' => $id,
     ]);
@@ -91,21 +91,64 @@ class UserModel
   public function updateUser($user)
   {
     try {
+      // Vérifier si un fichier d'image est téléchargé
+      if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+        $avatarData = file_get_contents($_FILES['avatar']['tmp_name']);
+        $avatarName = $_FILES['avatar']['name'];
+        $avatarDestination = realpath($_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesAvatar/') . '/' . $avatarName;
+        move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarDestination);
+
+        // Enregistrement du nouvel avatar dans la base de données
+        $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Avatar = :avatarName WHERE User_Id = :id');
+        $query->execute([
+          'avatarName' => $avatarName,
+          'id' => $_POST['id'],
+        ]);
+      }
+
+      // Mettre à jour les autres informations de l'utilisateur
+      $password = empty($_POST['password']) ? $_POST['current_password'] : password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+      // Vérifier si l'utilisateur connecté est SuperAdministrateur ou Administrateur
+      if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' || $_SESSION['user']['FK_Role_Id'] == 'Administrateur') {
+        // Récupérer le rôle actuel de l'utilisateur
+        $currentRole = $this->getOneById($_POST['id'])['Role_Name'];
+
+        // Vérifier les conditions de modification des rôles
+        if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' && $currentRole == 'Administrateur') {
+          // SuperAdministrateur peut rétrograder un Administrateur vers Utilisateur
+          $role = 'Utilisateur';
+        } elseif ($_SESSION['user']['FK_Role_Id'] == 'Administrateur' && $currentRole != 'Administrateur') {
+          // Administrateur peut passer un Utilisateur vers Administrateur
+          $role = 'Administrateur';
+        } else {
+          // Les autres cas ne sont pas autorisés
+          return "Modification de rôle non autorisée";
+        }
+      } else {
+        // Les autres utilisateurs ne peuvent pas modifier le rôle
+        $role = $_SESSION['user']['Role_Name'];
+      }
+
       $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
       $query->execute([
-        'email' => $user['email'],
-        'nom' => $user['nom'],
-        'prenom' => $user['prenom'],
-        'password' => $user['password'],
-        'role' => $user['role'],
-        'id' => $user['id'],
+        'email' => $_POST['email'],
+        'nom' => $_POST['nom'],
+        'prenom' => $_POST['prenom'],
+        'password' => $password,
+        'role' => $role,
+        'id' => $_POST['id'],
       ]);
-      return " Bien Enregistré ";
+
+      return "Bien Enregistré";
     } catch (\PDOException $e) {
       var_dump($e->getMessage());
-      return " une erreur est survenue";
+      return "Une erreur est survenue";
     }
   }
+
+
+
 
   public function deleteUser($id)
   {
