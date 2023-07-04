@@ -21,12 +21,10 @@
           <div class="card-body">
             <p><?php echo $post['Post_Article']; ?></p>
           </div>
-          <div class="flex card-footer">
-            <div class="flex card-footer-left">
+          <div class="card-footer">
+            <div class="post-like">
               </form>
-
-
-              <?php if (($_SESSION['user']['User_Id'] === $post['LikeUserId'] && $post['Post_Id'] === $post['LikePostId'])) { ?>
+            <?php if (($_SESSION['user']['User_Id'] === $post['LikeUserId'] && $post['Post_Id'] === $post['LikePostId'])) { ?>
 
                 <form action="../like/dislike/<?php echo $post['Post_Id']; ?>" method="post">
                   <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
@@ -41,41 +39,37 @@
 
                 <form action="../like/like/<?php echo $post['Post_Id']; ?>" method="post">
                   <input type="hidden" name="FK_Post_Id" value="<?php echo $post['Post_Id']; ?>">
+                  <div class="like-post">
                   <input type="hidden" name="FK_User_Id" value="<?php echo $_SESSION['user']['User_Id']; ?>">
                   <button type="submit" name="like" class="btn-like">
-                    <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like
+                    <img src="/Bonnefete/src/public/assets/icon/icons8-aimer-96.png" alt="">Like</div>
                     <p><?php echo $post['LikeCount']; ?></p>
                   </button>
                 </form>
-              <?php } ?>
+              <?php } ?></div>
 
-              <a href="../post/comment/<?php echo $post['Post_Id']; ?>">
-                <img src="/Bonnefete/src/public/assets/icon/icons8-bulle-96.png" alt="">Comment
-              </a>
-            </div>
-            <div class="flex card-footer-right">
-              <!--  fait moi un beau truc , si le user log et le l'email de l'autheur corresponde , on a le bouton supprimer et modifier , si le user log est Administrateur ou SuperAdministrateur , on a le button supprimer -->
+              <div class="comment-post">
+                <img src="/Bonnefete/src/public/assets/icon/icons8-bulle-96.png" alt="">
+                <a href="../post/comment/<?php echo $post['Post_Id']; ?>">Comment</a>
+              </div>
+           
+              <?php if ($_SESSION['user']['User_Email'] == $post['User_Email'] || $_SESSION['user']['Role_Name'] == "Administrateur") :  ?>
 
-              <?php if (($_SESSION['user']['User_Email'] === $post['User_Email'])) { ?>
-                <a href="../post/edit/<?php echo $post['Post_Id']; ?>">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-modifier-96.png" alt="">Edit
-                </a>
-                <a href="../post/delete/<?php echo $post['Post_Id']; ?>">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">Delete
-                </a>
+                <div class="edit-img">
+                  <img  src="/Bonnefete/src/public/assets/icon/icons8-modifier-96.png" alt="">
+                  <a href="../post/update/<?php echo $post['Post_Id']; ?>">Modifier</a>
+                </div>
 
-              <?php } else if ($_SESSION['user']['Role_Name'] == 'Administrateur' || $_SESSION['user']['Role_Name'] == 'SuperAdministrateur') { ?>
-                <a href="../post/delete/<?php echo $post['Post_Id']; ?>">
-                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">Delete
-                </a>
-              <?php } ?>
+                <div class="delete-post">
+                  <img src="/Bonnefete/src/public/assets/icon/icons8-supprimer-96.png" alt="">
+                  <a href="../post/delete/<?php echo $post['Post_Id']; ?>">supprimer</a>
+                </div>
 
-
-
-
-            </div>
-          </div>
+              <?php endif; ?>
+            
+          
         </div>
+      </div>
 
 
       <?php endforeach; ?>
