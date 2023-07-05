@@ -6,39 +6,31 @@
 
   <input type="hidden" name="id" value="<?= $user['User_Id'] ?>">
 
-  <div>
-    <label for="email">Adresse e-mail:</label>
-    <input type="email" id="email" name="email" value="<?= $user['User_Email'] ?>" required>
-  </div>
+  <label for="email">Adresse e-mail:</label>
+  <input type="email" id="email" name="email" value="<?= $user['User_Email'] ?>" required>
 
-  <div>
-    <label for="prenom">Prénom:</label>
-    <input type="text" id="prenom" name="prenom" value="<?= $user['User_Surname'] ?>" required>
-  </div>
+  <label for="prenom">Prénom:</label>
+  <input type="text" id="prenom" name="prenom" value="<?= $user['User_Surname'] ?>" required>
 
-  <div>
-    <label for="nom">Nom:</label>
-    <input type="text" id="nom" name="nom" value="<?= $user['User_Name'] ?>" required>
-  </div>
+  <label for="nom">Nom:</label>
+  <input type="text" id="nom" name="nom" value="<?= $user['User_Name'] ?>" required>
 
-  <div>
-    <label for="password">Nouveau mot de passe:</label>
-    <input type="password" id="password" name="password">
-  </div>
+  <label for="password">Nouveau mot de passe:</label>
+  <input type="password" id="password" name="password" value="<?= $user['User_Password'] ?>">
 
-  <div>
-    <label for="avatar">Avatar:</label>
-    <input type="file" id="avatar" name="avatar">
-  </div>
+  <label for="avatar">Avatar:</label>
+  <input type="file" id="avatar" name="avatar">
 
   <?php if ($_SESSION['user']['FK_Role_Id'] === 1) : // SuperAdministrateur 
   ?>
     <div>
       <label for="role">Rôle:</label>
-      <select id="role" name="role">
-        <option value="1" <?= ($user['FK_Role_Id'] == 1) ? 'selected' : '' ?>>SuperAdministrateur</option>
-        <option value="2" <?= ($user['FK_Role_Id'] == 2) ? 'selected' : '' ?>>Administrateur</option>
-        <option value="3" <?= ($user['FK_Role_Id'] == 3) ? 'selected' : '' ?>>Utilisateur</option>
+      <select name="role" id="role">
+        <?php foreach ($user['FK_Role_Id'] as $role) : ?>
+          <option value="<?php echo $role['Role_Id']; ?>" <?php if ($role['Role_Id'] === $user['FK_Role_Id']) echo 'selected'; ?>>
+            <?php echo $role['Role_Name']; ?>
+          </option>
+        <?php endforeach; ?>
       </select>
     </div>
   <?php elseif ($_SESSION['user']['FK_Role_Id'] === 2 && $user['FK_Role_Id'] === 3) : // Administrateur pouvant changer le rôle de Utilisateur 
@@ -53,7 +45,7 @@
   <?php endif; ?>
 
   <div>
-    <button type="submit">Enregistrer</button>
+    <button type="submit">Mettre à jour</button>
   </div>
 </form>
 

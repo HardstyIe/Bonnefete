@@ -88,31 +88,38 @@ class UserModel
     return $user;
   }
 
-  public function updateUser($user)
+  public function updateUser($userData, $fileData)
   {
     try {
       // Vérifier si un fichier d'image est téléchargé
-      if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-        $avatarData = file_get_contents($_FILES['avatar']['tmp_name']);
-        $avatarName = $_FILES['avatar']['name'];
-        $avatarDestination = realpath($_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesAvatar/') . '/' . $avatarName;
-        move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarDestination);
+      if (isset($fileData['avatar']) && $fileData['avatar']['error'] === UPLOAD_ERR_OK) {
+        $avatarData = file_get_contents($fileData['avatar']['tmp_name']);
+        $avatarName = $fileData['avatar']['name'];
+        $avatarDestination = $_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesAvatar/' . $avatarName;
+        move_uploaded_file($fileData['avatar']['tmp_name'], $avatarDestination);
+
+        // Supprimer l'ancien avatar s'il existe
+        if (!empty($userData['old_avatar'])) {
+          $oldAvatarPath = $_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesAvatar/' . $userData['old_avatar'];
+          if (file_exists($oldAvatarPath)) {
+            unlink($oldAvatarPath);
+          }
+        }
 
         // Enregistrement du nouvel avatar dans la base de données
         $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Avatar = :avatarName WHERE User_Id = :id');
-        $query->execute([
-          'avatarName' => $avatarName,
-          'id' => $_POST['id'],
-        ]);
+        $query->bindValue(':avatarName', $avatarName);
+        $query->bindValue(':id', $userData['id']);
+        $query->execute();
       }
 
       // Mettre à jour les autres informations de l'utilisateur
-      $password = empty($_POST['password']) ? $_POST['current_password'] : password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $password = empty($userData['password']) ? $userData['current_password'] : password_hash($userData['password'], PASSWORD_DEFAULT);
 
       // Vérifier si l'utilisateur connecté est SuperAdministrateur ou Administrateur
       if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' || $_SESSION['user']['FK_Role_Id'] == 'Administrateur') {
         // Récupérer le rôle actuel de l'utilisateur
-        $currentRole = $this->getOneById($_POST['id'])['Role_Name'];
+        $currentRole = $this->getOneById($userData['id'])['Role_Name'];
 
         // Vérifier les conditions de modification des rôles
         if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' && $currentRole == 'Administrateur') {
@@ -132,12 +139,12 @@ class UserModel
 
       $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
       $query->execute([
-        'email' => $_POST['email'],
-        'nom' => $_POST['nom'],
-        'prenom' => $_POST['prenom'],
+        'email' => $userData['email'],
+        'nom' => $userData['nom'],
+        'prenom' => $userData['prenom'],
         'password' => $password,
         'role' => $role,
-        'id' => $_POST['id'],
+        'id' => $userData['id'],
       ]);
 
       return "Bien Enregistré";
@@ -146,6 +153,8 @@ class UserModel
       return "Une erreur est survenue";
     }
   }
+
+
 
 
 

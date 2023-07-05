@@ -57,10 +57,13 @@ class PostController
 
   public function postUpdate()
   {
+    $postId = $_POST['id']; // Récupérer l'identifiant du post depuis l'URL
     $post = $_POST;
+    $post['id'] = $postId;
+    var_dump($_POST);
     $message = $this->postModel->updatePost($post);
-    header('Location: /bonnefete/home/index');
   }
+
   public function getDelete($id)
   {
     $message = $this->postModel->deletePost($id);

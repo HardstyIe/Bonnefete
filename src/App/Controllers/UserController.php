@@ -6,10 +6,12 @@ namespace Bonnefete\App\Controllers;
 require_once('./src/App/Models/UserModel.php');
 require_once('./src/App/Models/PostModel.php');
 require_once('./src/App/Models/HomeModel.php');
+require_once('./src/App/Models/RoleModel.php');
 
 use Bonnefete\App\Models\UserModel;
 use Bonnefete\App\Models\PostModel;
 use Bonnefete\App\Models\HomeModel;
+use Bonnefete\App\Models\RoleModel;
 
 class UserController
 {
@@ -18,11 +20,14 @@ class UserController
 
   protected $homeModel;
 
+  protected $roleModel;
+
   public function __construct()
   {
     $this->userModel = new UserModel();
     $this->postModel = new PostModel();
     $this->homeModel = new HomeModel();
+    $this->roleModel = new RoleModel();
   }
   public function getRegister()
   {
@@ -67,20 +72,43 @@ class UserController
     require_once '../Bonnefete/src/App/Views/users/profile.php';
   }
 
+  // Dans votre contrôleur
+  // Dans votre contrôleur
   public function getProfile($id)
   {
     $user = $this->userModel->getOneById($id);
+    $roles = $this->roleModel->getAllRoles();
+    $user['FK_Role_Id'] = $this->roleModel->getRoleIdByName($user['role']);
     $post = $this->postModel->getAllUserPost($user);
     require_once '../Bonnefete/src/App/Views/users/profile.php';
   }
 
+
+
+
   public function postProfile()
   {
-    $user = $_POST;
-    $message = $this->userModel->updateUser($user);
+    // Récupérer les données de l'utilisateur depuis le formulaire
+    $userData = [
+      'id' => $_POST['id'],
+      'email' => $_POST['email'],
+      'nom' => $_POST['nom'],
+      'prenom' => $_POST['prenom'],
+      'password' => $_POST['password'],
+      'role' => $this->roleModel->getRoleIdByName($_POST['role'])
+    ];
+
+    // Récupérer les données du fichier (avatar) depuis le formulaire
+    $fileData = $_FILES;
+
+    // Appeler la méthode updateUser du modèle en passant les données utilisateur et les données de fichier
+    $message = $this->userModel->updateUser($userData, $fileData);
+
     echo $message;
     header('Location: /bonnefete/user/profile');
   }
+
+
 
   public function getDelete()
   {
@@ -119,27 +147,36 @@ class UserController
 
   public function postUpdate()
   {
-    $id = $_POST['id'];
-    $email = $_POST['email'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+    // Récupérer l'utilisateur à partir de la base de données
+    $currentUser = $this->userModel->getOneById($_POST['id']);
 
+    // Vérifier si l'utilisateur existe
+    if (!$currentUser) {
+      // Gérer le cas où l'utilisateur n'existe pas
+      // Redirection ou affichage d'un message d'erreur, par exemple
+      return;
+    }
+
+    // Récupérer le mot de passe actuel de l'utilisateur
+    $currentPassword = $currentUser['User_Password'];
+
+    // Construire le tableau $user en incluant le mot de passe actuel
     $user = [
-      'id' => $id,
-      'email' => $email,
-      'nom' => $nom,
-      'prenom' => $prenom,
-      'password' => $password,
-      'role' => $role
+      'id' => $_POST['id'],
+      'email' => $_POST['email'],
+      'nom' => $_POST['nom'],
+      'prenom' => $_POST['prenom'],
+      'current_password' => $currentPassword, // Ajouter le mot de passe actuel
+      'password' => $_POST['password'],
+      'role' => $_POST['role']
     ];
 
-    $message = $this->userModel->updateUser($user);
-    var_dump($_POST);
-    echo $message;
-    header('Location: /bonnefete/user/MyProfile');
+    $message = $this->userModel->updateUser($user, $_FILES);
+
+    // Reste du code...
   }
+
+
 
 
   public function getDeleteUser($id)

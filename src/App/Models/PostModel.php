@@ -63,11 +63,12 @@ class PostModel
 
   public function getPostById($id)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt FROM post WHERE Post_Id = :id";
+    $sql = "SELECT Post_Id, Post_Title, Post_Article, FK_Image_Id, Post_CreateAt FROM post WHERE Post_Id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
   }
+
 
 
 
@@ -96,18 +97,57 @@ class PostModel
   public function updatePost($post)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article WHERE Post_Id = :id');
-      var_dump($post);
-      $query->execute([
-        'title' => $post['title'],
-        'article' => $post['article'],
-      ]);
-      return " Bien Enregistré ";
+      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Article = :article WHERE Post_Id = :id');
+
+      if (!empty($post['title'])) {
+        $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article WHERE Post_Id = :id');
+        $query->bindValue(':title', $post['title']);
+      }
+
+      $query->bindValue(':article', $post['article']);
+      $query->bindValue(':id', $post['id']);
+      $query->execute();
+
+      // Vérifier si une nouvelle image a été téléchargée
+      if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Supprimer l'ancienne image si elle existe
+        if (!empty($post['FK_Image_Id'])) {
+          $oldImageId = $post['FK_Image_Id'];
+          $oldImagePath = realpath($_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesPost/') . '/' . $oldImageId;
+          if (file_exists($oldImagePath)) {
+            unlink($oldImagePath);
+          }
+        }
+
+        // Télécharger et enregistrer la nouvelle image
+        $newImageName = $_FILES['image']['name'];
+        $destination = realpath($_SERVER['DOCUMENT_ROOT'] . '/Bonnefete/src/public/assets/imagesPost/') . '/' . $newImageName;
+        move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+
+        // Insérer la nouvelle image dans la table des images et récupérer son identifiant
+        $query = $this->connection->getPdo()->prepare('INSERT INTO images (Image_Name) VALUES (:imageName)');
+        $query->bindValue(':imageName', $newImageName);
+        $query->execute();
+        $newImageId = $this->connection->getPdo()->lastInsertId();
+
+        // Mettre à jour l'identifiant de l'image dans la table des posts
+        $query = $this->connection->getPdo()->prepare('UPDATE post SET FK_Image_Id = :imageId WHERE Post_Id = :id');
+        $query->bindValue(':imageId', $newImageId);
+        $query->bindValue(':id', $post['id']);
+        $query->execute();
+      }
+
+      return "Bien Enregistré";
     } catch (\PDOException $e) {
       var_dump($e->getMessage());
-      return " une erreur est survenue";
+      return "Une erreur est survenue";
     }
   }
+
+
+
+
+
 
   public function createComment($comment)
   {
