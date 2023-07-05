@@ -1,3 +1,5 @@
+<?php include_once('./src/utils/avatar_image.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +18,7 @@
     <a class="navbar-brand" href="/Bonnefete/home/index"><img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">BONNEFETE
     </a>
 
-    <?php if (isset($_SESSION['user'])) : ?>
+    <?php if (isset($_SESSION['user'])) :  ?>
       <div class="nav-user">
         <?php if ($_SESSION['user']['Role_Name'] == "Administrateur" || $_SESSION['user']['Role_Name'] == "SuperAdministrateur") : ?>
           <a class="nav-user-list" href="/Bonnefete/user/userList">Liste des Utilisateurs</a>
@@ -27,8 +29,14 @@
 
         <a class="nav-user-profile" href="/Bonnefete/user/MyProfile">Profil</a>
         <a class="nav-quit" href="../user/logout">Se déconnecter</a>
-        <div class="nav-user-id"><a href="/Bonnefete/user/MyProfile">
-            <img class="nav-img-user" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt=""></a>
+        <div class="nav-user-id">
+          <a href="/Bonnefete/user/MyProfile">
+            <?php if (!empty($_SESSION['user']['User_Avatar'])) : ?>
+              <img class="h-10 card-img" src="<?= $avatarPath . $_SESSION['user']['User_Avatar'] ?>" alt="">
+            <?php else : ?>
+              <img class="h-10 card-img" src="<?= $defaultAvatarPath ?>" alt="">
+            <?php endif; ?>
+          </a>
           <a class="nav-user-name">
             <?php echo $_SESSION['user']['User_Name'] . ' ' . $_SESSION['user']['User_Surname']; ?>
           </a>

@@ -26,6 +26,7 @@ class HomeModel
     user.User_Email,
     user.User_Name,
     user.User_Surname,
+    user.User_Avatar,
     likes.FK_User_Id AS LikeUserId,
     likes.FK_Post_Id AS LikePostId,
     IF (IF (likes.FK_User_Id=:userId, 1, 0)=IF (likes.FK_Post_Id=post.Post_Id, 1, 0), 1, 0) AS isLiked,

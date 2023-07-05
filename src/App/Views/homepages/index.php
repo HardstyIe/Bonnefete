@@ -1,12 +1,7 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
+<?php include_once('./src/utils/avatar_image.php'); ?>
 
-
-<?php if (isset($_SESSION['user'])) :  ?>
-  <?php
-  // $user contient les informations de l'utilisateur, récupérées par la fonction getOneById() par exemple.
-  $avatarPath = '/Bonnefete/src/public/assets/avatars/' . $user['User_Avatar'];
-  $defaultAvatarPath = '/Bonnefete/src/public/assets/imagesAvatar/photo-avatar-profil.png'; // Chemin de l'image par défaut
-  ?>
+<?php if (isset($_SESSION['user'])) : ?>
   <div class="container">
     <div class="w-full h-full home-page">
       <a class="btn-post" href="../post/create">
@@ -16,7 +11,11 @@
         <div class="w-3/5 card">
           <div class="card-header">
             <div class="card-user">
-              <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+              <?php if (isset($post['User_Avatar'])) : ?>
+                <img class="card-img h-10" src="<?= $avatarPath . $post['User_Avatar'] ?>" alt="">
+              <?php else : ?>
+                <img class="card-img h-10" src="<?= $defaultAvatarPath ?>" alt="">
+              <?php endif; ?>
               <h3><?php echo $post['User_Name'] . ' ' . $post['User_Surname']; ?></h3>
             </div>
             <h3><?php echo $post['Post_Title']; ?></h3>

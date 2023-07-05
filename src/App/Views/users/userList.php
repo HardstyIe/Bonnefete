@@ -22,8 +22,8 @@
             <td class="px-4 py-2 border"><?= $user['User_Email'] ?></td>
             <td class="px-4 py-2 border"><?= $user['Nb_Post'] ?></td>
             <td class="px-4 py-2 border">
-              <a href="/Bonnefete/user/edit?id=<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
-              <a href="/Bonnefete/user/delete?id=<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
+              <a href="/Bonnefete/user/update/<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
+              <a href="/Bonnefete/user/delete/<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
             </td>
           </tr>
         <?php endforeach; ?>

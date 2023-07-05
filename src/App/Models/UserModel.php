@@ -88,7 +88,7 @@ class UserModel
 
   public function getOneById($id)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
+    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
     $query->execute([
       'id' => $id,
     ]);
@@ -128,26 +128,14 @@ class UserModel
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
       }
 
-
-      // Vérifier si l'utilisateur connecté est SuperAdministrateur ou Administrateur
-      if ($_SESSION['user']['FK_Role_Id'] == 1 || $_SESSION['user']['FK_Role_Id'] == 2) {
-        // Récupérer le rôle actuel de l'utilisateur
-        $currentRole = $this->roleModel->getRoleNameById($userData['id']);
-        console_log($userData, false);
-        // Vérifier les conditions de modification des rôles
-        if ($_SESSION['user']['FK_Role_Id'] == 1 && $currentRole == 'Administrateur') {
-          // SuperAdministrateur peut rétrograder un Administrateur vers Utilisateur
-          $newRoleId = $this->roleModel->getRoleIdByName('Utilisateur');
-        } elseif ($_SESSION['user']['FK_Role_Id'] == 2 && $currentRole != 'Administrateur') {
-          // Administrateur peut passer un Utilisateur vers Administrateur
-          $newRoleId = $this->roleModel->getRoleIdByName('Administrateur');
-        } else {
-          // Les autres cas ne sont pas autorisés
-          return "Modification de rôle non autorisée";
-        }
-      } else {
-        // Les autres utilisateurs ne peuvent pas modifier le rôle
-        $newRoleId = $_SESSION['user']['FK_Role_Id'];
+      switch ($_SESSION['user']['FK_Role_Id']) {
+        case 1:
+          $newRoleId = $userData['role'];
+          break;
+        case 2:
+          if ($userData['role'] > 1) {
+            $newRoleId = $userData['role'];
+          }
       }
 
       $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
@@ -156,7 +144,7 @@ class UserModel
         'nom' => $userData['nom'],
         'prenom' => $userData['prenom'],
         'password' => $password,
-        'role' => $newRoleId,
+        'role' => $_POST['role'],
         'id' => $userData['id'],
       ]);
 

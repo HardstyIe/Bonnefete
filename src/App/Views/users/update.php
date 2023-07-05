@@ -44,7 +44,28 @@
         <option value="3" <?= ($user['FK_Role_Id'] == 3) ? 'selected' : '' ?>>Utilisateur</option>
       </select>
     </div>
+
+  <?php elseif ($_SESSION['user']['FK_Role_Id'] === 2 && $user['FK_Role_Id'] === 2) : // Administrateur ne pouvant pas changer le rôle de Administrateur
+  ?>
+    <div>
+      <label for="role">Rôle:</label>
+      <select id="role" name="role">
+        <option value="2" <?= ($user['FK_Role_Id'] == 2) ? 'selected' : '' ?>>Administrateur</option>
+      </select>
+    </div>
+
+  <?php elseif ($_SESSION['user']['FK_Role_Id'] === 3) : // Utilisateur ne pouvant pas changer le rôle de Administrateur ou de Utilisateur
+  ?>
+    <div>
+      <label for="role">Rôle:</label>
+      <select id="role" name="role">
+        <option value="3" <?= ($user['FK_Role_Id'] == 3) ? 'selected' : '' ?>>Utilisateur</option>
+      </select>
+    </div>
+
+
   <?php endif; ?>
+
 
   <div>
     <button type="submit">Mettre à jour</button>
