@@ -1,8 +1,10 @@
 <?php require_once('./src/App/Views/head.php') ?>
 
+<?php include_once('./src/utils/console_log.php') ?>
+
 <h1>Modifier l'utilisateur</h1>
 
-<form action="../../../Bonnefete/user/update" method="post" enctype="multipart/form-data">
+<form action="/Bonnefete/user/update/<?= $user['User_Id'] ?>" method="post" enctype="multipart/form-data">
 
   <input type="hidden" name="id" value="<?= $user['User_Id'] ?>">
 
@@ -16,7 +18,7 @@
   <input type="text" id="nom" name="nom" value="<?= $user['User_Name'] ?>" required>
 
   <label for="password">Nouveau mot de passe:</label>
-  <input type="password" id="password" name="password" value="<?= $user['User_Password'] ?>">
+  <input type="password" id="password" name="password" value="">
 
   <label for="avatar">Avatar:</label>
   <input type="file" id="avatar" name="avatar">
@@ -26,8 +28,8 @@
     <div>
       <label for="role">Rôle:</label>
       <select name="role" id="role">
-        <?php foreach ($user['FK_Role_Id'] as $role) : ?>
-          <option value="<?php echo $role['Role_Id']; ?>" <?php if ($role['Role_Id'] === $user['FK_Role_Id']) echo 'selected'; ?>>
+        <?php foreach ($roles as $role) : ?>
+          <option value="<?php echo $role['Role_Id']; ?>" <?php if ($role['Role_Name'] === $user['Role_Name']) echo 'selected'; ?>>
             <?php echo $role['Role_Name']; ?>
           </option>
         <?php endforeach; ?>

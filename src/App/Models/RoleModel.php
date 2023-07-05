@@ -27,15 +27,26 @@ class RoleModel
     $query = $this->connection->getPdo()->prepare('SELECT Role_Id FROM role WHERE Role_Name = :roleName');
     $query->execute(['roleName' => $roleName]);
     $result = $query->fetch();
-
-    var_dump($result); // Ajout du var_dump() pour le débogage
-
     if ($result) {
       return $result['Role_Id'];
     }
 
     return null;
   }
+  public function getRoleNameById($roleId)
+  {
+    $query = $this->connection->getPdo()->prepare('SELECT Role_Name FROM role WHERE Role_Id = :roleId');
+    $query->bindValue(':roleId', $roleId);
+    $query->execute();
+    $result = $query->fetch();
+
+    if ($result) {
+      return $result['Role_Name'];
+    }
+
+    return null;
+  }
+
 
 
   public function getOneById($id)

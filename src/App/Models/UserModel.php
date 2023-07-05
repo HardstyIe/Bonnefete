@@ -2,15 +2,22 @@
 
 namespace Bonnefete\App\Models;
 
+require_once('./src/App/Models/RoleModel.php');
+include_once('./src/utils/console_log.php');
+
 use Bonnefete\Bootstrap\Database;
+use Bonnefete\App\Models\RoleModel;
 
 class UserModel
 {
   private $connection;
 
+  protected $roleModel;
+
   public function __construct()
   {
     $this->connection = new Database();
+    $this->roleModel = new RoleModel();
   }
 
   public function createUser($user)
@@ -49,6 +56,7 @@ class UserModel
       if (password_verify($user['password'], $userFromDb['User_Password'])) {
         $_SESSION['user'] = $userFromDb;
         header('Location: /bonnefete/home/index');
+        exit;
       } else {
         return "Mot de passe incorrect";
       }
@@ -114,27 +122,32 @@ class UserModel
       }
 
       // Mettre à jour les autres informations de l'utilisateur
-      $password = empty($userData['password']) ? $userData['current_password'] : password_hash($userData['password'], PASSWORD_DEFAULT);
+      if (empty($userData['password'])) {
+        $password = $userData['current_password'];
+      } else {
+        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
+      }
+
 
       // Vérifier si l'utilisateur connecté est SuperAdministrateur ou Administrateur
-      if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' || $_SESSION['user']['FK_Role_Id'] == 'Administrateur') {
+      if ($_SESSION['user']['FK_Role_Id'] == 1 || $_SESSION['user']['FK_Role_Id'] == 2) {
         // Récupérer le rôle actuel de l'utilisateur
-        $currentRole = $this->getOneById($userData['id'])['Role_Name'];
-
+        $currentRole = $this->roleModel->getRoleNameById($userData['id']);
+        console_log($userData, false);
         // Vérifier les conditions de modification des rôles
-        if ($_SESSION['user']['FK_Role_Id'] == 'SuperAdministrateur' && $currentRole == 'Administrateur') {
+        if ($_SESSION['user']['FK_Role_Id'] == 1 && $currentRole == 'Administrateur') {
           // SuperAdministrateur peut rétrograder un Administrateur vers Utilisateur
-          $role = 'Utilisateur';
-        } elseif ($_SESSION['user']['FK_Role_Id'] == 'Administrateur' && $currentRole != 'Administrateur') {
+          $newRoleId = $this->roleModel->getRoleIdByName('Utilisateur');
+        } elseif ($_SESSION['user']['FK_Role_Id'] == 2 && $currentRole != 'Administrateur') {
           // Administrateur peut passer un Utilisateur vers Administrateur
-          $role = 'Administrateur';
+          $newRoleId = $this->roleModel->getRoleIdByName('Administrateur');
         } else {
           // Les autres cas ne sont pas autorisés
           return "Modification de rôle non autorisée";
         }
       } else {
         // Les autres utilisateurs ne peuvent pas modifier le rôle
-        $role = $_SESSION['user']['Role_Name'];
+        $newRoleId = $_SESSION['user']['FK_Role_Id'];
       }
 
       $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
@@ -143,7 +156,7 @@ class UserModel
         'nom' => $userData['nom'],
         'prenom' => $userData['prenom'],
         'password' => $password,
-        'role' => $role,
+        'role' => $newRoleId,
         'id' => $userData['id'],
       ]);
 
@@ -153,12 +166,6 @@ class UserModel
       return "Une erreur est survenue";
     }
   }
-
-
-
-
-
-
   public function deleteUser($id)
   {
     try {

@@ -17,7 +17,6 @@ class UserController
 {
   protected $userModel;
   protected $postModel;
-
   protected $homeModel;
 
   protected $roleModel;
@@ -42,12 +41,10 @@ class UserController
     echo '<a href="../user/login"> Se Connecter </a>';
   }
 
-
   public function getLogin()
   {
     require_once '../Bonnefete/src/App/Views/users/login.php';
   }
-
 
   public function postLogin()
   {
@@ -56,13 +53,11 @@ class UserController
     echo $message;
   }
 
-
   public function getLogout()
   {
     $this->userModel->logoutUser();
     header('Location: /bonnefete/user/login');
   }
-
 
   public function getMyProfile()
   {
@@ -78,13 +73,11 @@ class UserController
   {
     $user = $this->userModel->getOneById($id);
     $roles = $this->roleModel->getAllRoles();
-    $user['FK_Role_Id'] = $this->roleModel->getRoleIdByName($user['role']);
+    $user['FK_Role_Id'] = $this->roleModel->getRoleIdByName($user['Role_Name']);;
     $post = $this->postModel->getAllUserPost($user);
+
     require_once '../Bonnefete/src/App/Views/users/profile.php';
   }
-
-
-
 
   public function postProfile()
   {
@@ -97,7 +90,6 @@ class UserController
       'password' => $_POST['password'],
       'role' => $this->roleModel->getRoleIdByName($_POST['role'])
     ];
-
     // Récupérer les données du fichier (avatar) depuis le formulaire
     $fileData = $_FILES;
 
@@ -142,6 +134,7 @@ class UserController
   public function getUpdate($id)
   {
     $user = $this->userModel->getOneById($id);
+    $roles = $this->roleModel->getAllRoles();
     require_once '../Bonnefete/src/App/Views/users/update.php';
   }
 
@@ -173,7 +166,7 @@ class UserController
 
     $message = $this->userModel->updateUser($user, $_FILES);
 
-    // Reste du code...
+    echo $message;
   }
 
 
