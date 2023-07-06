@@ -162,7 +162,7 @@ class UserController
   public function getDeleteUser($id)
   {
     $user = $this->userModel->getOneById($id);
-    require_once '../Bonnefete/src/App/Views/users/delete.php';
+    require_once '../Bonnefete/src/App/Views/users/deleteUser.php';
   }
 
   public function postDeleteUser()

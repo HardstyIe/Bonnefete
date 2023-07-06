@@ -8,7 +8,6 @@
     <label for="image">Vous pouvez publier des images Ici</label>
     <input type="file" name="image" id="image">
     <button id="post">Publier</button>
-    <button class="post">Publier</button>
   </form>
 </div>
 <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
