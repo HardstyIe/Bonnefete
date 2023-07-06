@@ -99,24 +99,6 @@ class UserController
     echo $message;
     header('Location: /bonnefete/user/profile');
   }
-
-
-
-  public function getDelete()
-  {
-    $user = $this->userModel->getOneByEmail($_SESSION['users']['email']);
-    require_once '../Bonnefete/src/App/Views/users/delete.php';
-  }
-
-  public function postDelete()
-  {
-    $user = $_POST;
-    $message = $this->userModel->deleteUser($user);
-    echo $message;
-    header('Location: /bonnefete/user/login');
-  }
-
-
   public function getUserList()
   {
 
