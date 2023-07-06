@@ -1,7 +1,7 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 <!-- fait moi un tableau tailwind qui repertorie tous mes utilisateur , avec l'option de modifier ou supprimer l'utilisateur -->
-<?php if ($_SESSION['users']['rolename'] == "Administrateur" || "SuperAdministrateur") : ?>
+<?php if ($_SESSION['users']['rolename'] == 'Administrateur' || $_SESSION['users']['rolename'] == 'SuperAdministrateur') : ?>
   <main class="h-screen">
     <div class="flex flex-col w-4/5 text-center user-list">
       <h1 class="text-4xl font-bold">Liste des utilisateurs</h1>
