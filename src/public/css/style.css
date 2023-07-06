@@ -13,8 +13,9 @@ body {
   margin: 0;
   padding-top: 64px;
   background-image: url('/Bonnefete/src/public/assets/images/7158.jpg');
-  background-size: 100%;
-  background-attachment: fixed;
+  background-size: 100vw;
+  background-attachment: scroll;
+  background-repeat: no-repeat repeat-y;
 }
 
 /* navbar */
@@ -59,7 +60,7 @@ nav {
 
 img {
   width: 50px;
-  margin-top: 5px;
+  margin: 5px;
 }
 
 /* form regiter and login */
