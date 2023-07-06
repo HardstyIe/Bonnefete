@@ -38,12 +38,12 @@ class LikeController
 
   public function postLike()
   {
-    $FK_Post_Id = $_POST['FK_Post_Id'];
-    $FK_User_Id = $_POST['FK_User_Id'];
+    $FK_post_id = $_POST['FK_post_id'];
+    $FK_user_id = $_POST['FK_user_id'];
 
     $like = array(
-      'FK_Post_Id' => $FK_Post_Id,
-      'FK_User_Id' => $FK_User_Id
+      'FK_post_id' => $FK_post_id,
+      'FK_user_id' => $FK_user_id
     );
     $message = $this->likeModel->createLike($like);
     echo $message;
@@ -56,12 +56,12 @@ class LikeController
 
   public function postDislike()
   {
-    $FK_Post_Id = $_POST['FK_Post_Id'];
-    $FK_User_Id = $_POST['FK_User_Id'];
+    $FK_post_id = $_POST['FK_post_id'];
+    $FK_user_id = $_POST['FK_user_id'];
 
     $dislike = array(
-      'FK_Post_Id' => $FK_Post_Id,
-      'FK_User_Id' => $FK_User_Id
+      'FK_post_id' => $FK_post_id,
+      'FK_user_id' => $FK_user_id
     );
     $message = $this->likeModel->deleteLike($dislike);
     echo $message;

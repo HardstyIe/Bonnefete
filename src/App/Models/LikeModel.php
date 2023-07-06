@@ -18,7 +18,7 @@ class LikeModel
 
   public function getLikes()
   {
-    $sql = "SELECT Like_Id,FK_Post_Id,FK_User_Id FROM likes";
+    $sql = "SELECT likes.id,likes.FK_post_id,likes.FK_user_id FROM likes";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute();
     $likes = $query->fetchAll();
@@ -28,22 +28,22 @@ class LikeModel
 
   public function createLike($like)
   {
-    $sql = "INSERT INTO likes (FK_Post_Id,FK_User_Id) VALUES (:FK_Post_Id,:FK_User_Id)";
+    $sql = "INSERT INTO likes (likes.FK_post_id,likes.FK_user_id) VALUES (:FK_post_id,:FK_user_id)";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
-      'FK_Post_Id' => $like['FK_Post_Id'],
-      'FK_User_Id' => $like['FK_User_Id']
+      'FK_post_id' => $like['FK_post_id'],
+      'FK_user_id' => $like['FK_user_id']
     ]);
     return 'Like created';
   }
 
   public function deleteLike($like)
   {
-    $sql = "DELETE FROM likes WHERE FK_Post_Id = :FK_Post_Id AND FK_User_Id = :FK_User_Id";
+    $sql = "DELETE FROM likes WHERE likes.FK_post_id = :FK_post_id AND likes.FK_user_id = :FK_user_id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute([
-      'FK_Post_Id' => $like['FK_Post_Id'],
-      'FK_User_Id' => $like['FK_User_Id']
+      'FK_post_id' => $like['FK_post_id'],
+      'FK_user_id' => $like['FK_user_id']
     ]);
     return 'Like deleted';
   }

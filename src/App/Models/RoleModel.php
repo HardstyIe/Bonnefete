@@ -15,7 +15,7 @@ class RoleModel
 
   public function getAllRoles()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT Role_Id, Role_Name FROM role");
+    $query = $this->connection->getPdo()->prepare("SELECT roles.id, roles.rolename FROM roles");
     $query->execute();
     $roles = $query->fetchAll();
 
@@ -24,24 +24,24 @@ class RoleModel
 
   public function getRoleIdByName($roleName)
   {
-    $query = $this->connection->getPdo()->prepare('SELECT Role_Id FROM role WHERE Role_Name = :roleName');
+    $query = $this->connection->getPdo()->prepare('SELECT roles.id FROM roles WHERE roles.rolename = :roleName');
     $query->execute(['roleName' => $roleName]);
     $result = $query->fetch();
     if ($result) {
-      return $result['Role_Id'];
+      return $result['id'];
     }
 
     return null;
   }
   public function getRoleNameById($roleId)
   {
-    $query = $this->connection->getPdo()->prepare('SELECT Role_Name FROM role WHERE Role_Id = :roleId');
+    $query = $this->connection->getPdo()->prepare('SELECT roles.rolename FROM roles WHERE roles.id = :roleId');
     $query->bindValue(':roleId', $roleId);
     $query->execute();
     $result = $query->fetch();
 
     if ($result) {
-      return $result['Role_Name'];
+      return $result['name'];
     }
 
     return null;
@@ -51,7 +51,7 @@ class RoleModel
 
   public function getOneById($id)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT Role_Id,Role_Name FROM role WHERE Role_Id = :id");
+    $query = $this->connection->getPdo()->prepare("SELECT roles.id,roles.rolename FROM roles WHERE roles.id = :id");
     $query->execute([
       'id' => $id,
     ]);
@@ -61,7 +61,7 @@ class RoleModel
 
   public function getOneByName($name)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT Role_Id,Role_Name FROM role WHERE Role_Name = :name");
+    $query = $this->connection->getPdo()->prepare("SELECT roles.id,roles.rolename FROM roles WHERE roles.rolename = :name");
     $query->execute([
       'name' => $name,
     ]);
@@ -72,7 +72,7 @@ class RoleModel
   public function createRole($role)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO role (Role_Name) VALUES (:name)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO roles (roles.rolename) VALUES (:name)');
       $query->execute([
         'name' => $role['name'],
       ]);
@@ -86,7 +86,7 @@ class RoleModel
   public function updateRole($role)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('UPDATE role SET Role_Name = :name WHERE Role_Id = :id');
+      $query = $this->connection->getPdo()->prepare('UPDATE roles SET roles.rolename = :name WHERE id = :id');
       $query->execute([
         'name' => $role['name'],
         'id' => $role['id'],
@@ -101,7 +101,7 @@ class RoleModel
   public function deleteRole($id)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('DELETE FROM role WHERE Role_Id = :id');
+      $query = $this->connection->getPdo()->prepare('DELETE FROM roles WHERE roles.id = :id');
       $query->execute([
         'id' => $id,
       ]);
@@ -114,7 +114,7 @@ class RoleModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN Role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.FK_role_id,roles.rolename,users.avatar FROM users INNER JOIN roles ON FK_role_id = roles.id WHERE users.email = :email");
     $query->execute([
       'email' => $email,
     ]);

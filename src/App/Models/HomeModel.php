@@ -17,38 +17,38 @@ class HomeModel
   public function getPosts()
   {
     $sql = "SELECT
-    COUNT(likes.FK_User_Id) AS LikeCount,
-    post.Post_Article,
-    post.Post_Title,
-    post.Post_CreateAt,
-    post.Post_Id,
-    post.FK_User_Id,
-    user.User_Email,
-    user.User_Name,
-    user.User_Surname,
-    user.User_Avatar,
-    likes.FK_User_Id AS LikeUserId,
-    likes.FK_Post_Id AS LikePostId,
-    IF (IF (likes.FK_User_Id=:userId, 1, 0)=IF (likes.FK_Post_Id=post.Post_Id, 1, 0), 1, 0) AS isLiked,
-    images.Image_Name
+    COUNT(likes.FK_user_id) AS likes_count,
+    posts.article,
+    posts.title,
+    posts.created_at,
+    posts.id,
+    posts.FK_user_id,
+    users.email,
+    users.name,
+    users.surname,
+    users.avatar,
+    likes.FK_user_id AS likes_user_id,
+    likes.FK_post_id AS likes_post_id,
+    IF (IF (likes.FK_user_id=:userId, 1, 0)=IF (likes.FK_post_id=posts.id, 1, 0), 1, 0) AS is_liked,
+    images.imagename
   FROM
-    post
-  INNER JOIN user
-    ON FK_User_Id = User_Id
+    posts
+  INNER JOIN users
+    ON FK_user_id = users.id
   LEFT JOIN likes
-    ON post.Post_Id = likes.FK_Post_Id
+    ON posts.id = likes.FK_post_id
   LEFT JOIN images
-    ON post.FK_Image_Id = images.Image_Id
+    ON posts.FK_image_id = images.id
   GROUP BY
-    Post_Id,
-    LikeUserId,
-    LikePostId
+    posts.id,
+    likes_user_id,
+    likes_post_id
   ORDER BY
-    Post_CreateAt DESC;";
+    posts.created_at DESC;";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(
       [
-        'userId' => $_SESSION['user']['User_Id']
+        'userId' => $_SESSION['users']['id']
       ]
     );
 
@@ -58,7 +58,7 @@ class HomeModel
 
   public function getPostById($id)
   {
-    $sql = "SELECT Post_Id,Post_Title,Post_Article,Post_CreateAt,FK_User_Id,User_Name,User_Surname,User_Email FROM post INNER JOIN user ON FK_User_Id = User_Id WHERE Post_Id = :id";
+    $sql = "SELECT posts.id,posts.title,posts.article,posts.created_at,posts.FK_user_id,users.name,users.surname,users.email FROM posts INNER JOIN users ON FK_user_id = users.id WHERE posts.id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetch();
@@ -66,7 +66,7 @@ class HomeModel
 
   public function getCommentByPostId($id)
   {
-    $sql = "SELECT Comment_Id,Comment_Article,Comment_CreateAt,FK_User_Id,FK_Post_Id,User_Name,User_Surname,User_Email FROM comment INNER JOIN user ON FK_User_Id = User_Id WHERE FK_Post_Id = :id";
+    $sql = "SELECT comments.id,comments.article,comments.created_at,comments.FK_user_id,comments.FK_post_id,users.name,users.surname,users.email FROM comments INNER JOIN users ON FK_user_id = users.id WHERE FK_post_id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetchAll();
@@ -74,7 +74,7 @@ class HomeModel
 
   public function getPostByUserId($id)
   {
-    $sql = "SELECT Post_Title,Post_Article,Post_CreateAt FROM post WHERE User_Id = :id";
+    $sql = "SELECT posts.title,posts.article,posts.created_at FROM posts WHERE users.id = :id";
     $query = $this->connection->getPdo()->prepare($sql);
     $query->execute(['id' => $id]);
     return $query->fetchAll();
@@ -83,11 +83,11 @@ class HomeModel
   public function updatePost($post)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('UPDATE post SET Post_Title = :title, Post_Article = :article WHERE Post_Id = :id');
+      $query = $this->connection->getPdo()->prepare('UPDATE posts SET posts.title = :title, posts.article = :article WHERE posts.id = :id');
       $query->execute([
         'title' => $post['title'],
         'article' => $post['article'],
-        'id' => $post['Post_Id']
+        'id' => $post['id']
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {
@@ -99,7 +99,7 @@ class HomeModel
   public function deletePost($id)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE Post_Id = :id');
+      $query = $this->connection->getPdo()->prepare('DELETE FROM posts WHERE posts.id = :id');
       $query->execute([
         'id' => $id,
       ]);
@@ -113,7 +113,7 @@ class HomeModel
   public function createComment($comment)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO comment (Comment_Article,FK_User_Id,FK_Post_Id) VALUES (:article,:userId,:postId)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO comments (comments.article,comments.FK_user_id,comments.FK_post_id) VALUES (:article,:userId,:postId)');
       $query->execute([
         'article' => $comment['article'],
         'userId' => $comment['userId'],

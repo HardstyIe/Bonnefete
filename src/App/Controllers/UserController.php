@@ -61,7 +61,7 @@ class UserController
 
   public function getMyProfile()
   {
-    $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
+    $user = $this->userModel->getOneByEmail($_SESSION['users']['email']);
     $post = $this->postModel->getAllUserPost($user);
 
     require_once '../Bonnefete/src/App/Views/users/profile.php';
@@ -73,7 +73,7 @@ class UserController
   {
     $user = $this->userModel->getOneById($id);
     $roles = $this->roleModel->getAllRoles();
-    $user['FK_Role_Id'] = $this->roleModel->getRoleIdByName($user['Role_Name']);;
+    $user['FK_role_id'] = $this->roleModel->getRoleIdByName($user['name']);;
     $post = $this->postModel->getAllUserPost($user);
 
     require_once '../Bonnefete/src/App/Views/users/profile.php';
@@ -104,7 +104,7 @@ class UserController
 
   public function getDelete()
   {
-    $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
+    $user = $this->userModel->getOneByEmail($_SESSION['users']['email']);
     require_once '../Bonnefete/src/App/Views/users/delete.php';
   }
 
@@ -151,7 +151,7 @@ class UserController
     }
 
     // Récupérer le mot de passe actuel de l'utilisateur
-    $currentPassword = $currentUser['User_Password'];
+    $currentPassword = $currentUser['password'];
 
     // Construire le tableau $user en incluant le mot de passe actuel
     $user = [
@@ -167,6 +167,11 @@ class UserController
     $message = $this->userModel->updateUser($user, $_FILES);
 
     echo $message;
+    if ($_SESSION['users']['id'] == $_POST['id']) {
+      header('Location: /bonnefete/user/MyProfile');
+    } else {
+      header('Location: /bonnefete/user/profile/' . $_POST['id']);
+    }
   }
 
 

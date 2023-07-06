@@ -29,7 +29,7 @@ class HomeController
   {
 
     $posts = $this->homeModel->getPosts();
-    $user = $this->userModel->getOneByEmail($_SESSION['user']['User_Email']);
+    $user = $this->userModel->getOneByEmail($_SESSION['users']['email']);
     require_once '../Bonnefete/src/App/Views/homepages/index.php';
   }
 }

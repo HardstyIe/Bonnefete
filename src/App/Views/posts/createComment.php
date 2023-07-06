@@ -1,7 +1,7 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 <div class="create-form">
   <form class="post-create" action="../../post/createComment/ " method="post">
-    <input type="hidden" name="FK_Post_Id" value="<?php echo $posts['Post_Id'] ?>">
+    <input type="hidden" name="FK_post_id" value="<?php echo $posts['id'] ?>">
 
 
     <label class="article" for="article">Contenu</label>

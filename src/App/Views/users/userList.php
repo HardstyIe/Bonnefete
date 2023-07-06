@@ -1,8 +1,13 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 <!-- fait moi un tableau tailwind qui repertorie tous mes utilisateur , avec l'option de modifier ou supprimer l'utilisateur -->
+<<<<<<< HEAD
 <?php if ($_SESSION['user']['Role_Name'] == "Administrateur" || "SuperAdministrateur") : ?>
   <main class="user-list">
+=======
+<?php if ($_SESSION['users']['name'] == "Administrateur" || "SuperAdministrateur") : ?>
+  <main class="flex flex-col items-center justify-center">
+>>>>>>> e6cb7532fdae164247caa91a06c84379d40702bb
     <h1 class="text-4xl font-bold">Liste des utilisateurs</h1>
     <table class="table-auto">
       <thead>
@@ -15,15 +20,15 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($users as $user) : ?>
+        <?php foreach ($users as $user) : console_log($_SESSION['users'], true) ?>
           <tr>
-            <td class="px-4 py-2 border"><?= $user['User_Surname'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['User_Name'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['User_Email'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['Nb_Post'] ?></td>
+            <td class="px-4 py-2 border"><?= $user['surname'] ?></td>
+            <td class="px-4 py-2 border"><?= $user['name'] ?></td>
+            <td class="px-4 py-2 border"><?= $user['email'] ?></td>
+            <td class="px-4 py-2 border"><?= $user['nb_posts'] ?></td>
             <td class="px-4 py-2 border">
-              <a href="/Bonnefete/user/update/<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
-              <a href="/Bonnefete/user/delete/<?= $user['User_Id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
+              <a href="/Bonnefete/user/update/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
+              <a href="/Bonnefete/user/delete/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
             </td>
           </tr>
         <?php endforeach; ?>

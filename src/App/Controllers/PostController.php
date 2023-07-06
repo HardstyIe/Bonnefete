@@ -44,7 +44,7 @@ class PostController
   public function postCreateComment()
   {
     $comment = $_POST;
-    $id = $_POST['FK_Post_Id'];
+    $id = $_POST['FK_post_id'];
     $message = $this->postModel->createComment($comment);
     header("Location: /bonnefete/post/comment/$id");
   }
@@ -60,8 +60,8 @@ class PostController
     $postId = $_POST['id']; // Récupérer l'identifiant du post depuis l'URL
     $post = $_POST;
     $post['id'] = $postId;
-    var_dump($_POST);
     $message = $this->postModel->updatePost($post);
+    return $message;
   }
 
   public function getDelete($id)
