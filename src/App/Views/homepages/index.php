@@ -2,7 +2,7 @@
 <?php include_once('./src/utils/avatar_image.php'); ?>
 
 <?php if (isset($_SESSION['users'])) : ?>
-  <div class="container mx-auto ">
+  <div class="container mx-auto  ">
     <div class="w-4/5">
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">

@@ -13,7 +13,7 @@
   <title>BONNEFETE</title>
 </head>
 
-<body class="flex justify-center pt-16">
+<body class="flex justify-center min-h-screen py-24">
   <nav class="fixed top-0 z-10 flex items-center justify-between w-full h-16 navbar">
     <a class="text-5xl navbar-brand" href="/Bonnefete/home/index"><img class="icon-snow " src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">BONNEFETE
     </a>
@@ -22,9 +22,6 @@
       <div class="flex justify-between w-1/2 text-xl nav-user item">
         <?php if ($_SESSION['users']['rolename'] == "Administrateur" || $_SESSION['users']['rolename'] == "SuperAdministrateur") : ?>
           <a class="nav-user-list" href="/Bonnefete/user/userList">Liste des Utilisateurs</a>
-          <?php if ($_SESSION['users']['rolename'] == "SuperAdministrateur") : ?>
-            <a class="nav-user-list" href="/Bonnefete/user/log">Liste des Logs</a>
-          <?php endif; ?>
         <?php endif; ?>
 
         <a class="nav-user-profile" href="/Bonnefete/user/MyProfile">Profil</a>

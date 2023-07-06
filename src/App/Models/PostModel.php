@@ -171,10 +171,10 @@ class PostModel
         'user' => $_SESSION['users']["email"]
       ]);
       $users = $queryUser->fetch();
-      $sql = "INSERT INTO comments(comments.article, comments.created_at, comments.FK_user_id, comments.FK_post_id) VALUES (:article , :date , :user, :post)";
+      $sql = "INSERT INTO comments(comments.article, comments.created_at, comments.FK_user_id, comments.FK_post_id) VALUES (:content , :date , :user, :post)";
       $query = $this->connection->getPDO()->prepare($sql);
       $query->execute([
-        'article' => $comment['article'],
+        'content' => $comment['content'],
         'date' => date("Y-m-d H:i:s"),
         'user' => $users['id'],
         'post' => $comment['FK_post_id']

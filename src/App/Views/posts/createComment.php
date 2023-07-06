@@ -1,8 +1,8 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 
-<div class=" h-screen create-form w-1/2 rounded-lg">
-  <form class="w-full p-8 mx-auto bg-white border-2 border-gray-300  post-create flex flex-col items-center" action="../post/createComment/" method="post" enctype="multipart/form-data">
+<div class="w-full max-w-3xl h-screen rounded-lg  create-form">
+  <form class="flex flex-col items-center w-full p-8 mx-auto bg-white border-2 border-gray-300 post-create" action="../../post/createComment/" method="post" enctype="multipart/form-data">
     <input type="hidden" name="FK_post_id" value="<?php echo $posts['id'] ?>">
 
     <label for="content" class="mb-2 text-gray-800">Contenu</label>

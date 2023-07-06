@@ -1,15 +1,31 @@
 :root {
   --main-color: #38413d;
+  --background-color: #62796f;
   --second-color: #d9d9d9;
   --edit-color: rgb(13, 43, 212);
   --valid-color: green;
   --delete-color: red;
-  --opacity-color: linear-gradient(90deg, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 0.8169468470982143) 0%);
+  /* --opacity-color: linear-gradient(90deg, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 0.8169468470982143) 0%); */
 }
 
 body {
-  background-color: var(--second-color);
+  background-color: var(--background-color);
 }
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #38413d;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;
+  border-radius: 9999px;
+}
+
+
 
 /* navbar */
 
@@ -21,17 +37,17 @@ nav {
 .register {
   margin: 5% 0 2% 0;
   text-decoration: none;
-  color: var(--main-color);
+  color: var(--second-color);
 }
 
 .create-account {
   margin: 5% 0 2% 0;
   text-decoration: none;
-  color: var(--main-color);
+  color: var(--second-color);
 }
 
 button {
-  color: var(--main-color);
+  color: var(--second-color);
   margin-top: 5%;
 }
 
@@ -42,7 +58,7 @@ button {
   bottom: 50px;
   right: 50px;
   z-index: 3;
-  background-color: var(--second-color);
+  background-color: var(--background-color);
   border-radius: 10px;
   align-items: center;
   padding: 0 3px 4px 3px;
@@ -64,7 +80,7 @@ button {
 }
 
 .post-create input {
-  color: var(--main-color);
+  color: var(--second-color);
 }
 
 
@@ -75,7 +91,7 @@ button {
 
 #post {
   background-color: var(--second-color);
-  color: var(--main-color);
+  color: var(--second-color);
   padding: 0.5%;
   border-radius: 5px;
 }
@@ -178,7 +194,7 @@ button {
 
 .card-footer {
   font-size: 1em;
-  color: var(--main-color);
+  color: var(--second-color);
   width: 100vh;
   display: flex;
   flex-direction: row;
@@ -207,10 +223,14 @@ button {
   padding-right: 5px;
 }
 
+.card-footer button {
+  background-color: transparent;
+}
+
 /* User Profile */
 
 .m-profile {
-  background-color: var(--second-color);
+  background-color: var(--background-color);
   width: 80%;
   margin: auto;
 }
@@ -252,8 +272,8 @@ button {
 
 .table-auto {
   padding: 1%;
-  background-color: var(--second-color);
-  color: var(--main-color);
+  background-color: var(--background-color);
+  color: var(--second-color);
 }
 
 .user-list {
@@ -304,7 +324,7 @@ button {
   }
 
   .nav-user-list {
-    display: none;
+    margin-right: 5px;
   }
 
   .nav-user-profile {
@@ -340,7 +360,7 @@ button {
 
   .card-footer button {
     font-size: 10px;
-    background-color: var(--second-color);
+    background-color: transparent;
   }
 
   .btn-post {
@@ -422,6 +442,7 @@ button {
 
   .user-list td {
     display: flex;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
   }
@@ -476,7 +497,7 @@ button {
   /* profil update */
 
   #user-profile-edit {
-    color: var(--main-color);
+    color: var(--second-color);
     text-align: center;
     font-size: 2em;
   }
@@ -491,7 +512,7 @@ button {
   }
 
   .edit-user-profile input {
-    color: var(--main-color);
+    color: var(--second-color);
     background-color: var(--second-color);
   }
 
