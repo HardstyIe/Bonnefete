@@ -32,7 +32,7 @@ class PostController
   {
     $post = $_POST;
     $message = $this->postModel->createPost($post);
-    header('Location: /bonnefete/home/index');
+    header('Location:/Bonnefete/home/index');
   }
 
   public function getCreateComment($id)

@@ -171,6 +171,7 @@ button {
 }
 
 .card {
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -180,7 +181,7 @@ button {
 
 .card-body {
   border-radius: 0 0 5px 5px;
-  width: 150%;
+  width: 100%;
   background-color: var(--main-color);
 }
 
@@ -194,7 +195,7 @@ button {
 .card-header {
   border-radius: 5px 5px 0 0;
   background-color: var(--main-color);
-  width: 150%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -299,6 +300,7 @@ button {
   margin: auto;
   width: 70%;
   padding: 1%;
+  border-radius: 10px;
 }
 
 .profile h1 {
@@ -585,5 +587,13 @@ button {
 
   .user-class {
     text-align: center;
+  }
+
+  .card-header  {
+    width: 120%;
+  }
+
+  .card-body {
+    width: 120%;
   }
 }

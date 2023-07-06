@@ -3,18 +3,18 @@
 
 <?php if (isset($_SESSION['users'])) : ?>
   <div class="container">
-    <div class="w-full h-full home-page">
+    <div class="">
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">
       </a>
       <?php foreach ($posts as $post) : ?>
-        <div class="w-3/5 card">
+        <div class="card">
           <div class="card-header">
             <div class="card-user">
               <?php if (isset($post['avatar'])) : ?>
                 <img class="h-10 card-img" src="<?= $avatarPath . $post['avatar'] ?>" alt="">
               <?php else : ?>
-                <img class="h-10 card-img" src="<?= $defaultAvatarPath ?>" alt="">
+                <img class="" src="<?= $defaultAvatarPath ?>" alt="">
               <?php endif; ?>
               <h3><?php echo $post['name'] . ' ' . $post['surname']; ?></h3>
             </div>

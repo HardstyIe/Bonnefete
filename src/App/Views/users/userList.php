@@ -26,15 +26,15 @@
               <a href="/Bonnefete/user/delete/<?= $user['id'] ?>" class="delete-user">Supprimer</a>
             </td>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+          <?php endforeach; ?>
+        </thead>
+      </table>
+    </div>
   </main>
+  <?php else : ?>
 
-<?php else : ?>
-
-  <main class="flex flex-col items-center justify-center">
-    <h1 class="text-4xl font-bold">Vous n'avez pas accés a cette page</h1>
-  <?php endif; ?>
+<main class="flex flex-col items-center justify-center">
+  <h1 class="text-4xl font-bold">Vous n'avez pas accés a cette page</h1>
+<?php endif; ?>
 
   <?php require_once '../Bonnefete/src/App/Views/foot.php'; ?>
