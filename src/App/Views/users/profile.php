@@ -1,25 +1,25 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 <?php include_once('./src/utils/avatar_image.php'); ?>
 
-<main class="">
+<main class="m-profile">
   <div class="">
-    <div>
+    <div class="profile-avatar" >
       <?php if (isset($user['User_Avatar'])) : ?>
         <img class="card-img h-10" src="<?= $avatarPath . $user['User_Avatar'] ?>" alt="">
       <?php else : ?>
         <img class="card-img h-10" src="<?= $defaultAvatarPath ?>" alt="">
       <?php endif; ?>
     </div>
-    <div>
-      <h1>Profil</h1>
+    <div class="profile">
+      <h1>Profile</h1>
       <p>Prénom : <?= $user['User_Surname'] ?></p>
       <p>Nom : <?= $user['User_Name'] ?></p>
       <p>Email : <?= $user['User_Email'] ?></p>
-      <p>Nombre de Post publié : <?= count($post) ?></p>
+      <p>Nombre de Post publiès : <?= count($post) ?></p>
       <?php if ($_SESSION['user']['User_Email'] == $user['User_Email'] || $_SESSION['user']['FK_Role_Id'] == 1 || $_SESSION['user']['FK_Role_Id'] == 2) : ?>
         <div>
-          <a href="/Bonnefete/user/update/<?php echo $user['User_Id']; ?>">Modifier</a>
-          <a href="/Bonnefete/user/delete/<?php echo $user['User_Id']; ?>">Supprimer</a>
+          <a class="btn-profile-edit" href="/Bonnefete/user/update/<?php echo $user['User_Id']; ?>">Modifier</a>
+          <a class="btn-profile-delete" href="/Bonnefete/user/delete/<?php echo $user['User_Id']; ?>">Supprimer</a>
         </div>
       <?php endif; ?>
     </div>

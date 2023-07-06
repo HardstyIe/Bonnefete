@@ -2,7 +2,7 @@
 
 <!-- fait moi un tableau tailwind qui repertorie tous mes utilisateur , avec l'option de modifier ou supprimer l'utilisateur -->
 <?php if ($_SESSION['user']['Role_Name'] == "Administrateur" || "SuperAdministrateur") : ?>
-  <main class="flex flex-col items-center justify-center">
+  <main class="user-list">
     <h1 class="text-4xl font-bold">Liste des utilisateurs</h1>
     <table class="table-auto">
       <thead>
