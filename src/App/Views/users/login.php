@@ -3,7 +3,7 @@
 require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 
-<form action="../user/login" method="post">
+<form class="user-login" action="../user/login" method="post">
   <label for="email">E-mail</label>
   <input type="text" name="email" placeholder="email" required>
 

@@ -4,9 +4,9 @@
 <main class="m-profile h-screen">
   <div class="profile-avatar">
     <?php if (isset($user['avatar'])) : ?>
-      <img class="card-img h-10" src="<?= $avatarPath . $user['avatar'] ?>" alt="">
+      <img class="card-img" src="<?= $avatarPath . $user['avatar'] ?>" alt="">
     <?php else : ?>
-      <img class="card-img h-10" src="<?= $defaultAvatarPath ?>" alt="">
+      <img class="card-img" src="<?= $defaultAvatarPath ?>" alt="">
     <?php endif; ?>
   </div>
   <div class="profile">

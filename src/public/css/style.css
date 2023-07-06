@@ -1,27 +1,15 @@
 :root {
   --main-color: #38413d;
   --second-color: #d9d9d9;
+  --edit-color: rgb(13, 43, 212);
   --valid-color: green;
   --delete-color: red;
   --opacity-color: linear-gradient(90deg, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 0.8169468470982143) 0%);
 }
 
-html {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--main-color);
-  text-align: left;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: var(--second-color);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -482,6 +470,80 @@ button {
 
   /* user profile */
 
-  
+  .profile-avatar img{
+    width: 60%;
+    margin-top: 5%;
+  }
 
+  .profile {
+    width: 80%;
+    padding: 15px 5px 20px 5px;
+  }
+
+  /* user list */
+
+  .user-list {
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-list th {
+    display: none;
+  }
+
+  .user-list td {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .users-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: solid 1px var(--main-color);
+  }
+
+  .edit-user {
+    background-color: var(--edit-color);
+    color: var(--second-color);
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .delete-user {
+    background-color: var(--delete-color);
+    color: var(--second-color);
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  /* login */
+
+  .user-login {
+    background-color: var(--main-color);
+    width: 80%;
+    padding: 20px 5px;
+  }
+
+  .user-login input {
+    background-color: var(--second-color);
+  }
+
+  .user-login label {
+    color: var(--second-color);
+  }
+
+  .user-login button {
+    color: var(--second-color);
+  }
+
+  .register {
+    color: var(--second-color);
+  }
 }
