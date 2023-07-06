@@ -2,33 +2,35 @@
 
 <!-- fait moi un tableau tailwind qui repertorie tous mes utilisateur , avec l'option de modifier ou supprimer l'utilisateur -->
 <?php if ($_SESSION['users']['rolename'] == "Administrateur" || "SuperAdministrateur") : ?>
-  <main class="user-list">
-    <h1 class="text-4xl font-bold">Liste des utilisateurs</h1>
-    <table class="table-auto">
-      <thead>
-        <tr>
-          <th class="px-4 py-2">Prénom</th>
-          <th class="px-4 py-2">Nom</th>
-          <th class="px-4 py-2">Email</th>
-          <th class="px-4 py-2">Nombre de post</th>
-          <th class="px-4 py-2">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($users as $user) : ?>
+  <main class="h-screen">
+    <div class="w-4/5 text-center user-list flex flex-col">
+      <h1 class="text-4xl font-bold">Liste des utilisateurs</h1>
+      <table class="table-auto">
+        <thead>
           <tr>
-            <td class="px-4 py-2 border"><?= $user['surname'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['name'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['email'] ?></td>
-            <td class="px-4 py-2 border"><?= $user['nb_posts'] ?></td>
-            <td class="px-4 py-2 border">
-              <a href="/Bonnefete/user/update/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
-              <a href="/Bonnefete/user/delete/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
-            </td>
+            <th class="px-4 py-2">Prénom</th>
+            <th class="px-4 py-2">Nom</th>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Nombre de post</th>
+            <th class="px-4 py-2">Action</th>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($users as $user) : ?>
+            <tr>
+              <td class="px-4 py-2 border"><?= $user['surname'] ?></td>
+              <td class="px-4 py-2 border"><?= $user['name'] ?></td>
+              <td class="px-4 py-2 border"><?= $user['email'] ?></td>
+              <td class="px-4 py-2 border"><?= $user['nb_posts'] ?></td>
+              <td class="px-4 py-2 border">
+                <a href="/Bonnefete/user/update/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
+                <a href="/Bonnefete/user/delete/<?= $user['id'] ?>" class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Supprimer</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
   </main>
 
 <?php else : ?>

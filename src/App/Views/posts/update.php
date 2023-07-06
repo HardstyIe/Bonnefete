@@ -1,6 +1,6 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
-<div class="create-form">
+<div class="create-form h-screen my-auto ">
   <form class="post-create" action="../../post/update/<?php echo $post[0]['id']; ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $post[0]['id'] ?>">
     <input type="hidden" name="old_image" value="<?= $post[0]['FK_image_id'] ?>">

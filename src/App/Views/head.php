@@ -28,7 +28,7 @@
         <?php endif; ?>
 
         <a class="nav-user-profile" href="/Bonnefete/user/MyProfile">Profil</a>
-        <a class="nav-quit" href="../user/logout">Se déconnecter</a>
+        <a class="nav-quit" href="/Bonnefete/user/logout">Se déconnecter</a>
         <div class="nav-user-id">
           <a href="/Bonnefete/user/MyProfile">
             <?php if (!empty($_SESSION['users']['avatar'])) : ?>
