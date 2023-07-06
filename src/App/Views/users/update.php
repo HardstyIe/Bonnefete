@@ -2,9 +2,9 @@
 
 <?php include_once('./src/utils/console_log.php') ?>
 
-<h1>Modifier l'utilisateur</h1>
+<h1 id="user-profile-edit">Modifier l'utilisateur</h1>
 
-<form action="/Bonnefete/user/update/<?= $user['id'] ?>" method="post" enctype="multipart/form-data">
+<form class="edit-user-profile" action="/Bonnefete/user/update/<?= $user['id'] ?>" method="post" enctype="multipart/form-data">
 
   <input type="hidden" name="id" value="<?= $user['id'] ?>">
 
@@ -25,7 +25,7 @@
 
   <?php if ($_SESSION['users']['FK_role_id'] === 1) : // SuperAdministrateur 
   ?>
-    <div>
+    <div class="user-class">
       <label for="role">Rôle:</label>
       <select name="role" id="role">
         <?php foreach ($roles as $role) : ?>
