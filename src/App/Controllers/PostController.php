@@ -61,7 +61,7 @@ class PostController
     $post = $_POST;
     $post['id'] = $postId;
     $message = $this->postModel->updatePost($post);
-    return $message;
+    header('Location: /bonnefete/home/index');
   }
 
   public function getDelete($id)

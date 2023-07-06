@@ -1,10 +1,10 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 <?php include_once('./src/utils/avatar_image.php'); ?>
 
-<main class="m-profile h-screen">
+<main class="m-profile h-full">
   <div class="profile-avatar">
     <?php if (isset($user['avatar'])) : ?>
-      <img class="card-img " src="<?= $avatarPath . $user['avatar'] ?>" alt="">
+      <img class="card-img" src="<?= $avatarPath . $user['avatar'] ?>" alt="">
     <?php else : ?>
       <img class="card-img" src="<?= $defaultAvatarPath ?>" alt="">
     <?php endif; ?>
@@ -24,10 +24,10 @@
   </div>
   </div>
   <?php foreach ($post as $p) : ?>
-    <div class="card w-3/5">
+    <div class="card">
       <div class="card-header">
         <div class="card-user">
-          <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+          <img class="card-img h-12" src="<?= $avatarPath . $user['avatar'] ?>" alt="">
           <h3><?php echo $p['name'] . ' ' . $p['surname']; ?></h3>
         </div>
         <h3><?php echo $p['title']; ?></h3>

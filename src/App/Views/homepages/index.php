@@ -2,13 +2,13 @@
 <?php include_once('./src/utils/avatar_image.php'); ?>
 
 <?php if (isset($_SESSION['users'])) : ?>
-  <div class="container">
-    <div class="w-full h-full home-page">
+  <div class="container mx-auto ">
+    <div class="w-4/5">
       <a class="btn-post" href="../post/create">
         <img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt="">
       </a>
       <?php foreach ($posts as $post) : ?>
-        <div class="w-3/5 card">
+        <div class="card">
           <div class="card-header">
             <div class="card-user">
               <?php if (isset($post['avatar'])) : ?>

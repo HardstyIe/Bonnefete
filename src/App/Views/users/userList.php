@@ -23,9 +23,9 @@
               <td class="px-4 py-2 border"><?= $user['email'] ?></td>
               <td class="px-4 py-2 border"><?= $user['nb_posts'] ?></td>
               <td class="flex px-4 py-2 border h-14 ">
-                <a href="/Bonnefete/user/update/<?= $user['id'] ?>" class="px-4 my-auto py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Modifier</a>
-                <form action="../user/deleteUser/<?= $user['id'] ?>" method="post" class="px-3 py-1 m-0 font-bold text-white bg-red-500 rounded hover:bg-red-700">
-                  <button type="submit" class="text-white text ">Supprimer</button>
+                <a href="/Bonnefete/user/update/<?= $user['id'] ?>" class="px-4 my-auto py-2 font-bold text-black  rounded hover:bg-blue-700">Modifier</a>
+                <form action="../user/deleteUser/<?= $user['id'] ?>" method="post" class="px-3 py-1 m-0 font-bold text-black  rounded hover:bg-red-700">
+                  <button type="submit" class="text-black text ">Supprimer</button>
                 </form>
               </td>
             </tr>

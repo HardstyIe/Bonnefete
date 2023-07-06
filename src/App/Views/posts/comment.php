@@ -1,4 +1,5 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
+<?php include_once './src/utils/avatar_image.php' ?>
 
 <?php if (isset($_SESSION['users'])) :  ?>
   <div class="container h-screen">
@@ -9,7 +10,11 @@
       <div class="w-3/5 card">
         <div class="card-header">
           <div class="card-user">
-            <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+            <?php if (isset($post['avatar'])) : ?>
+              <img class="h-10 card-img" src="<?= $avatarPath . $post['avatar'] ?>" alt="">
+            <?php else : ?>
+              <img class="h-10 card-img" src="<?= $defaultAvatarPath ?>" alt="">
+            <?php endif; ?>
             <h3><?php echo $posts['name'] . ' ' . $posts['surname']; ?></h3>
           </div>
           <h3><?php echo $posts['title']; ?></h3>
@@ -30,7 +35,11 @@
         <div class="w-3/5 card">
           <div class="card-header">
             <div class="card-user">
-              <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
+              <?php if (isset($post['avatar'])) : ?>
+                <img class="h-10 card-img" src="<?= $avatarPath . $post['avatar'] ?>" alt="">
+              <?php else : ?>
+                <img class="h-10 card-img" src="<?= $defaultAvatarPath ?>" alt="">
+              <?php endif; ?>
               <h3><?php echo $comment['name'] . ' ' . $comment['surname']; ?></h3>
             </div>
             <p><?php echo $comment['created_at']; ?></p>
