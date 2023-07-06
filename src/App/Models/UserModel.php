@@ -24,7 +24,7 @@ class UserModel
   {
     $password = password_hash($user['password'], PASSWORD_DEFAULT);
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO user (User_Email, User_Surname, User_Name, User_Password) VALUES (:email, :prenom, :nom, :password)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO users (email, surname, name, password) VALUES (:email, :prenom, :nom, :password)');
       $query->execute([
         'email' => $user['email'],
         'prenom' => $user['prenom'],
@@ -40,7 +40,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN Role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.FK_role_id,roles.rolename,users.avatar FROM users INNER JOIN roles ON FK_role_id = roles.id WHERE users.email = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -49,12 +49,12 @@ class UserModel
   }
   public function loginUser($user)
   {
-    $userFromDb = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Email = :email");
+    $userFromDb = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.password,users.FK_role_id,roles.rolename,users.avatar FROM users INNER JOIN roles ON users.FK_role_id = roles.id WHERE users.email = :email");
     $userFromDb->execute(['email' => $user['email']]);
     $userFromDb = $userFromDb->fetch();
     if ($userFromDb) {
-      if (password_verify($user['password'], $userFromDb['User_Password'])) {
-        $_SESSION['user'] = $userFromDb;
+      if (password_verify($user['password'], $userFromDb['password'])) {
+        $_SESSION['users'] = $userFromDb;
         header('Location: /bonnefete/home/index');
         exit;
       } else {
@@ -72,7 +72,7 @@ class UserModel
 
   public function getAll()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name FROM user INNER JOIN role ON FK_Role_Id = Role_Id");
+    $query = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.password,users.FK_role_id,roles.rolename FROM users INNER JOIN roles ON users.FK_role_id = roles.id");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
@@ -80,7 +80,7 @@ class UserModel
 
   public function getUserListWithPostCount()
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,count(Post_Id) as Nb_Post FROM user LEFT JOIN post ON FK_User_Id = User_Id GROUP BY User_Email");
+    $query = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.password,users.FK_role_id,count(posts.id) as nb_posts FROM users LEFT JOIN posts ON FK_user_id = users.id GROUP BY users.email");
     $query->execute();
     $users = $query->fetchAll();
     return $users;
@@ -88,7 +88,7 @@ class UserModel
 
   public function getOneById($id)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT User_Id,User_Email,User_Name,User_Surname,User_Password,FK_Role_Id,Role_Name,User_Avatar FROM user INNER JOIN role ON FK_Role_Id = Role_Id WHERE User_Id = :id");
+    $query = $this->connection->getPdo()->prepare("SELECT users.id,users.email,users.name,users.surname,users.password,users.FK_role_id,roles.rolename,users.avatar FROM users INNER JOIN roles ON users.FK_role_id = roles.id WHERE users.id = :id");
     $query->execute([
       'id' => $id,
     ]);
@@ -115,7 +115,7 @@ class UserModel
         }
 
         // Enregistrement du nouvel avatar dans la base de données
-        $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Avatar = :avatarName WHERE User_Id = :id');
+        $query = $this->connection->getPdo()->prepare('UPDATE users SET avatar = :avatarName WHERE users.id = :id');
         $query->bindValue(':avatarName', $avatarName);
         $query->bindValue(':id', $userData['id']);
         $query->execute();
@@ -128,7 +128,7 @@ class UserModel
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
       }
 
-      switch ($_SESSION['user']['FK_Role_Id']) {
+      switch ($_SESSION['users']['FK_role_id']) {
         case 1:
           $newRoleId = $userData['role'];
           break;
@@ -138,7 +138,7 @@ class UserModel
           }
       }
 
-      $query = $this->connection->getPdo()->prepare('UPDATE user SET User_Email = :email, User_Name = :nom, User_Surname = :prenom, User_Password = :password, FK_Role_Id = :role WHERE User_Id = :id');
+      $query = $this->connection->getPdo()->prepare('UPDATE users SET users.email = :email, users.name = :nom, users.surname = :prenom, users.password = :password, users.FK_role_id = :role WHERE users.id = :id');
       $query->execute([
         'email' => $userData['email'],
         'nom' => $userData['nom'],
@@ -157,7 +157,7 @@ class UserModel
   public function deleteUser($id)
   {
     try {
-      $query = $this->connection->getPdo()->prepare('DELETE FROM user WHERE User_Id = :id');
+      $query = $this->connection->getPdo()->prepare('DELETE FROM users WHERE users.id = :id');
       $query->execute([
         'id' => $id,
       ]);

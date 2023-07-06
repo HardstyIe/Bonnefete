@@ -5,37 +5,37 @@ namespace Bonnefete\App\Models;
 class Like
 {
 
-  protected $FK_User_Id;
+  protected $FK_user_id;
 
-  protected $FK_Post_Id;
+  protected $FK_post_id;
 
-  public function __construct($FK_User_Id, $FK_Post_Id)
+  public function __construct($FK_user_id, $FK_post_id)
   {
-    $this->FK_User_Id = $FK_User_Id;
-    $this->FK_Post_Id = $FK_Post_Id;
+    $this->FK_user_id = $FK_user_id;
+    $this->FK_post_id = $FK_post_id;
   }
 
-  public function getFK_User_Id(): string
+  public function getFK_user_id(): string
   {
-    return $this->FK_User_Id;
+    return $this->FK_user_id;
   }
 
-  public function setFK_User_Id(string $FK_User_Id): void
+  public function setFK_user_id(string $FK_user_id): void
   {
-    if (strlen($FK_User_Id) > 2) {
-      $this->FK_User_Id = $FK_User_Id;
+    if (strlen($FK_user_id) > 2) {
+      $this->FK_user_id = $FK_user_id;
     }
   }
 
-  public function getFK_Post_Id(): string
+  public function getFK_post_id(): string
   {
-    return $this->FK_Post_Id;
+    return $this->FK_post_id;
   }
 
-  public function setFK_Post_Id(string $FK_Post_Id): void
+  public function setFK_post_id(string $FK_post_id): void
   {
-    if (strlen($FK_Post_Id) > 2) {
-      $this->FK_Post_Id = $FK_Post_Id;
+    if (strlen($FK_post_id) > 2) {
+      $this->FK_post_id = $FK_post_id;
     }
   }
 }

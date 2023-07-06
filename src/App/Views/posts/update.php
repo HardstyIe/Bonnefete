@@ -1,9 +1,9 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 <div class="create-form">
-  <form class="post-create" action="../../post/update/<?php echo $post['Post_Id']; ?>" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="<?= $post['Post_Id'] ?>">
-    <input type="hidden" name="old_image" value="<?= $post['FK_Image_Id'] ?>">
+  <form class="post-create" action="../../post/update/<?php echo $post[0]['id']; ?>" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?= $post[0]['id'] ?>">
+    <input type="hidden" name="old_image" value="<?= $post[0]['FK_image_id'] ?>">
 
     <label for="title">Titre</label>
     <input type="text" name="title" id="title">

@@ -4,22 +4,22 @@
 <main class="">
   <div class="">
     <div>
-      <?php if (isset($user['User_Avatar'])) : ?>
-        <img class="card-img h-10" src="<?= $avatarPath . $user['User_Avatar'] ?>" alt="">
+      <?php if (isset($user['avatar'])) : ?>
+        <img class="card-img h-10" src="<?= $avatarPath . $user['avatar'] ?>" alt="">
       <?php else : ?>
         <img class="card-img h-10" src="<?= $defaultAvatarPath ?>" alt="">
       <?php endif; ?>
     </div>
     <div>
       <h1>Profil</h1>
-      <p>Prénom : <?= $user['User_Surname'] ?></p>
-      <p>Nom : <?= $user['User_Name'] ?></p>
-      <p>Email : <?= $user['User_Email'] ?></p>
+      <p>Prénom : <?= $user['surname'] ?></p>
+      <p>Nom : <?= $user['name'] ?></p>
+      <p>Email : <?= $user['email'] ?></p>
       <p>Nombre de Post publié : <?= count($post) ?></p>
-      <?php if ($_SESSION['user']['User_Email'] == $user['User_Email'] || $_SESSION['user']['FK_Role_Id'] == 1 || $_SESSION['user']['FK_Role_Id'] == 2) : ?>
+      <?php if ($_SESSION['users']['email'] == $user['email'] || $_SESSION['users']['FK_role_id'] == 1 || $_SESSION['users']['FK_role_id'] == 2) : ?>
         <div>
-          <a href="/Bonnefete/user/update/<?php echo $user['User_Id']; ?>">Modifier</a>
-          <a href="/Bonnefete/user/delete/<?php echo $user['User_Id']; ?>">Supprimer</a>
+          <a href="/Bonnefete/user/update/<?php echo $user['id']; ?>">Modifier</a>
+          <a href="/Bonnefete/user/delete/<?php echo $user['id']; ?>">Supprimer</a>
         </div>
       <?php endif; ?>
     </div>
@@ -29,13 +29,13 @@
       <div class="card-header">
         <div class="card-user">
           <img class="card-img" src="/Bonnefete/src/public/assets/images/photo-avatar-profil.png" alt="">
-          <h3><?php echo $p['User_Name'] . ' ' . $p['User_Surname']; ?></h3>
+          <h3><?php echo $p['name'] . ' ' . $p['surname']; ?></h3>
         </div>
-        <h3><?php echo $p['Post_Title']; ?></h3>
-        <p><?php echo $p['Post_CreateAt']; ?></p>
+        <h3><?php echo $p['title']; ?></h3>
+        <p><?php echo $p['created_at']; ?></p>
       </div>
       <div class="card-body">
-        <p><?php echo $p['Post_Article']; ?></p>
+        <p><?php echo $p['article']; ?></p>
       </div>
     </div>
 
