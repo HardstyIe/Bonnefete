@@ -342,3 +342,11 @@ button {
   border: solid 2px var(--main-color);
   padding: 1%;
 }
+
+
+/* smartphone version */
+
+@media (max-width: 414px) {
+
+  
+}
