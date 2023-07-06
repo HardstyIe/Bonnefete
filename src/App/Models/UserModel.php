@@ -24,7 +24,7 @@ class UserModel
   {
     $password = password_hash($user['password'], PASSWORD_DEFAULT);
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO users (email, surname, name, password) VALUES (:email, :prenom, :nom, :password)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO users (users.email, users.surname, users.name, users.password) VALUES (:email, :prenom, :nom, :password)');
       $query->execute([
         'email' => $user['email'],
         'prenom' => $user['prenom'],
