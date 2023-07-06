@@ -1,7 +1,7 @@
 <?php require_once '../Bonnefete/src/App/Views/head.php'; ?>
 
 <?php if (isset($_SESSION['users'])) :  ?>
-  <div class="container">
+  <div class="container h-screen">
     <div class="w-full h-full home-page">
       <a href="/Bonnefete/post/CreateComment/<?php echo $posts['id']; ?>"><img src="/Bonnefete/src/public/assets/icon/icons8-new-post-96.png" alt=""></a>
 
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <h1 class="font-black text-neutral-900 text-center text-4xl">Commentaires</h1>
+      <h1 class="text-4xl font-black text-center text-neutral-900">Commentaires</h1>
 
       <?php foreach ($comments as $comment) : ?>
         <div class="w-3/5 card">
