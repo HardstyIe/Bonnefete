@@ -15,8 +15,18 @@
 
 <body class="flex justify-center min-h-screen py-24">
   <nav class="fixed top-0 z-10 flex items-center justify-between w-full h-16 navbar">
-    <a class="text-5xl navbar-brand" href="/Bonnefete/home/index"><img class="icon-snow " src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">BONNEFETE
-    </a>
+    <?php if (isset($_SESSION['users'])) : ?>
+      <a class="text-5xl navbar-brand" href="/Bonnefete/home/index">
+        <img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">
+        BONNEFETE
+      </a>
+    <?php else : ?>
+      <a class="text-5xl navbar-brand" href="/Bonnefete/user/login">
+        <img class="icon-snow" src="/Bonnefete/src/public/assets/images/icons8-flocon-de-neige-64.png" alt="">
+        BONNEFETE
+      </a>
+    <?php endif; ?>
+
 
     <?php if (isset($_SESSION['users'])) :  ?>
       <div class="flex justify-between w-1/2 text-xl nav-user item">
