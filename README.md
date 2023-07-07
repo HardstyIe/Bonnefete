@@ -25,11 +25,26 @@ Feature
 
 init the file using the following commands
 
+go inside the htdocs file inside your AMPP folder
+
+then run these command one by one :
+
 ```bash
  git clone git@github.com:HardstyIe/Bonnefete.git
  cd Bonnefete
  composer install
+ npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
 ```
+
+then you need to import the database for the website to work
+
+## Environment Variables
+
+Copy the content inside .env.example inside a .env folder , and replace the content inside the quote with your database information
+
+## Run Locally
+
+on Localhost/Bonnefete/user/register to start
 
 ## Badges
 
