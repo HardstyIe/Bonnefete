@@ -33,6 +33,7 @@ then run these command one by one :
  git clone git@github.com:HardstyIe/Bonnefete.git
  cd Bonnefete
  composer install
+ yarn
  npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
 ```
 
