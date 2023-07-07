@@ -24,7 +24,7 @@
           <div class="card-body">
             <p><?php echo $post['article']; ?>
               <?php if (!empty($post['imagename'])) : ?>
-                <img src="/Bonnefete/src/public/assets/imagesPost/<?= $post['imagename'] ?>" alt="Image du post">
+                <img src="/Bonnefete/src/public/assets/imagesPost/<?= $post['imagename'] ?>" alt="Image du post" class="h-12 flex">
               <?php endif; ?>
             </p>
 
