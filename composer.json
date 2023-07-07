@@ -1,0 +1,19 @@
+{
+  "name": "hardy/bonnefete",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Bonnefete\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "HardstyIe",
+      "email": "hardstyle.dd@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  }
+}
